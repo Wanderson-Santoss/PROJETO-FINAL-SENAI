@@ -1,0 +1,550 @@
+/* NAVBAR */
+.navbar {
+    background-color: #8E270E;
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    transition: color 0.3s ease;
+    display: flex; /* Adicionado para alinhar o logo e o texto */
+    align-items: center; /* Centraliza verticalmente o logo com o texto */
+}
+
+.navbar-brand:hover {
+    color: orange;
+}
+
+.navbar-logo {
+    height: 100px; /* Ajuste a altura para o tamanho desejado do logo */
+    width: auto; /* Mantém a proporção da imagem */
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.nav .nav-link {
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav .nav-link.active,
+.nav .nav-link:hover {
+    background-color: white;
+    color: orange;
+    border-radius: 8px;
+}
+
+
+.span-logo{
+    color: orange;
+}
+
+
+body{
+    font-family: Roboto sans-serif;
+}
+
+
+
+
+
+
+/* Seção da barra de pesquisa */
+.search-bar-section {
+    background-color: #f8f9fa; /* Um tom de fundo leve para a seção de pesquisa */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef; /* Linha sutil abaixo da barra de pesquisa */
+}
+
+
+/* Ajustes para o input de pesquisa */
+.search-bar-section .form-control {
+    border-color: #8E270E;
+    box-shadow: none; /* Remove a sombra padrão do Bootstrap para um visual mais limpo */
+}
+
+
+.search-bar-section .form-control:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+
+/* Ajuste para o botão de pesquisa */
+.search-bar-section .btn-primary {
+    background-color: #8E270E;
+    border-color: orange;
+}
+
+
+.search-bar-section .btn-primary:hover {
+    background-color: #884a4a;
+    border-color: #8E270E;
+}
+
+
+
+
+
+
+/* Estilização do menu de botoes categorias */
+
+
+.categorias {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Aumentei um pouco o gap para melhor espaçamento em telas maiores */
+    margin: 30px auto; /* Margem superior e inferior, e auto para centralizar */
+    padding: 15px 0; /* Padding vertical, padding horizontal 0 */
+    flex-wrap: wrap;
+    max-width: 90%; /* Limita a largura para centralizar em telas muito grandes */
+}
+
+.categoria-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    min-height: 100px;
+    padding: 10px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.categoria-btn i {
+    font-size: 30px;
+    color: #8E270E;
+    margin-bottom: 6px;
+}
+
+.categoria-btn span {
+    font-size: 13px;
+    color: #333;
+    font-weight: 500;
+    max-width: 80px;
+    word-wrap: break-word;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+}
+
+
+.categoria-btn:hover {
+    background-color: rgba(142, 39, 14, 0.1);
+}
+
+.categoria-btn:hover i {
+    transform: scale(1.2);
+}
+
+
+
+
+
+
+/* Ajustes de tamanhos e transições do slide */
+#carousel {
+    margin-bottom: 40px; /* Espaço abaixo do carrossel */
+}
+
+.img-slide {
+  width: 25%;
+  height: 300px; /* ajuste como quiser */
+  object-fit: cover;
+  /* border-radius: 8px; */
+  margin-right: 5px;
+}
+
+
+.img-slide:last-child {
+  margin-right: 0;
+}
+
+
+/* Mantém os controles no centro vertical da imagem */
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8%;
+  opacity: 0.8;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 30px; 
+    height: 30px;
+}
+
+
+
+.carousel-indicators button {
+    background-color: #8E270E; /* Cor do tema para os indicadores */
+    border: none;
+    width: 10px; /* Tamanho dos indicadores */
+    height: 10px;
+    border-radius: 50%; /* Redondo */
+    margin: 0 5px;
+}
+
+.carousel-indicators button.active {
+    background-color: orange; /* Cor do indicador ativo */
+}
+
+
+
+/* Ajusta o espaçamento das imagens dentro dos slides para telas menores */
+@media (max-width: 768px) {
+    .carousel-item .d-flex img {
+        width: 50%; /* Em telas médias, 2 imagens por linha */
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-item .d-flex img {
+        width: 100%; /* Em telas pequenas, 1 imagem por linha */
+        height: 180px;
+        margin-right: 0;
+        margin-bottom: 5px; /* Adiciona margem abaixo em telas pequenas */
+    }
+    /* Para telas muito pequenas, o d-flex precisa se comportar como coluna */
+    .carousel-item .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+
+
+/* Perfis */
+
+
+.perfis {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px auto;
+    padding: 15px 0;
+    flex-wrap: wrap;
+}
+
+
+
+
+.perfis-btn {
+    background-color: transparent;
+    border: 2px solid #8E270E;
+    color: #8E270E;
+    padding: 12px 25px; 
+    border-radius: 30px; 
+    font-size: 1.1rem; 
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-transform: uppercase; 
+    min-width: 160px; 
+    text-align: center;
+}
+
+
+.perfis-btn h1{
+    color: #884a4a; /* Cor dos ícones*/
+
+
+    transition: transform 0.3s;
+}
+
+
+.perfis-btn:hover {
+    background-color: #8E270E;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Sombra mais pronunciada no hover */
+}
+
+
+
+/* CARDS DE PERFIL */
+/* As regras mais específicas para .card-perfil prevalecerão sobre as de .card genérico */
+.card-perfil {
+    background-color: #8E270E; /* Cor de fundo do card */
+    color: #ffffff;
+    border-radius: 15px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px; /* Para manter os cards com altura mais uniforme */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Sombra mais destacada para o card inteiro */
+    overflow: hidden; /* Garante que nada transborde do card arredondado */
+}
+
+/* Imagem de perfil dentro do card */
+.card-perfil .perfil-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 3px solid #fff; /* Borda da imagem de perfil */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Texto de descrição do card */
+.card-perfil .description-text {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem; /* Adiciona um pequeno espaço abaixo do texto */
+}
+
+.card-perfil .description-text a {
+    color: orange;
+    text-decoration: none;
+}
+
+.card-perfil .description-text a:hover {
+    text-decoration: underline;
+}
+
+/* Rodapé do card (estrelas e botão) */
+.card-perfil .d-flex.justify-content-between.align-items-center.mt-auto.pt-2.border-top {
+    border-color: rgba(255, 255, 255, 0.3) !important; /* Borda mais suave para o separador */
+}
+
+.card-perfil .d-flex.align-items-center.gap-1 i {
+    color: yellow; /* As estrelas podem ser uma cor mais vibrante como amarelo */
+}
+
+/* MEDIA QUERIES PARA CARDS DE PERFIL */
+@media (max-width: 992px) { /* Tablets e telas maiores de celular */
+    .card-perfil {
+        min-height: 270px;
+    }
+    .card-perfil .description-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) { /* Celulares pequenos */
+    .card-perfil {
+        /* Remove justify-content: space-between para alinhar itens em coluna */
+        align-items: center; /* Centraliza o conteúdo do card */
+        text-align: center;
+        padding: 20px !important;
+        min-height: auto; /* Permite que a altura se ajuste */
+    }
+
+    .card-perfil .d-flex.align-items-center.mb-3 {
+        flex-direction: column; /* Empilha imagem e informações do profissional */
+        text-align: center;
+        margin-bottom: 15px !important; /* Mais espaço abaixo da info de perfil */
+    }
+
+    .card-perfil .perfil-img {
+        margin-right: 0 !important;
+        margin-bottom: 10px; /* Espaço abaixo da imagem do perfil */
+    }
+
+    .card-perfil .d-flex.justify-content-between.align-items-center.mt-auto.pt-2.border-top {
+        flex-direction: column; /* Estrelas e botão "Seguir" empilhados */
+        gap: 10px; /* Espaçamento entre estrelas e botão */
+        width: 100%;
+        padding-top: 15px !important;
+    }
+
+    .card-perfil .d-flex.align-items-center.gap-1 {
+        justify-content: center; /* Centraliza as estrelas */
+        width: 100%;
+    }
+
+    .card-perfil button.btn {
+        width: 80%; /* Botão "Seguir" mais largo */
+        max-width: 200px;
+    }
+}
+
+
+
+/* FOOTER */
+.footer {
+    background-color: #8E270E; /* Cor de fundo principal do seu tema */
+    color: white;
+    padding-top: 40px; /* Mais padding no topo */
+    padding-bottom: 30px; /* Padding na parte inferior */
+}
+
+.footer h5 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 8px; /* Espaço entre os itens da lista */
+}
+
+.footer .list-unstyled a {
+    color: rgba(255, 255, 255, 0.7); /* Links com um tom de branco mais suave */
+    transition: color 0.3s ease;
+}
+
+.footer .list-unstyled a:hover {
+    color: orange; /* Cor de destaque no hover */
+    text-decoration: none;
+}
+
+.footer .social-links .social-icon {
+    color: white;
+    font-size: 1.8rem; /* Tamanho dos ícones sociais */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer .social-links .social-icon:hover {
+    color: orange; /* Cor de destaque no hover */
+    transform: translateY(-3px); /* Pequeno efeito de levantar */
+}
+
+.footer-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória suave */
+}
+
+.footer p.small {
+    font-size: 0.85rem; /* Fonte menor para informações de direitos autorais */
+    color: rgba(255, 255, 255, 0.6) !important; /* Mais suave */
+}
+
+/* Media Query para responsividade do rodapé */
+@media (max-width: 768px) {
+    .footer .col-md-4 {
+        text-align: center; /* Centraliza o texto das colunas em telas menores */
+    }
+    .footer .list-unstyled {
+        padding-left: 0; /* Remove o padding padrão da lista em telas pequenas */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Cadastro */
+
+
+
+
+.container-cadastro {
+    width: 100%;
+    max-width: 600px; 
+    padding: 30px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.form-control {
+    padding: 15px; 
+    font-size: 15px; 
+}
+
+h1 {
+    font-size: 25px;
+}
+
+
+.btn {
+    padding: 10px 20px;
+    font-size:15px;
+}
+
+
+/* Animação de transição entre telas */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+
+
+
+
+
+
+
+
+
+/*          CHAT ESTATICO            */
+
+
+
+
+@keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .bounce-gentle {
+            animation: bounce-gentle 2s infinite;
+        }
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        .typing-indicator {
+            display: inline-block;
+        }
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #9CA3AF;
+            margin: 0 1px;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
