@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Define your galleries. Each sub-array is a page of images.
     const galleries = [
         [ // Gallery 1 (6 photos)
-            'images/Bolos/bolo1.jpg', 'images/Bolos/bolo2.jpg', 'images/Bolos/bolo3.jpg',
-            'images/Bolos/bolo4.jpg', 'images/Bolos/bolo5.jpg', 'images/Bolos/bolo6.jpg'
+            'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg',
+            'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg'
         ],
         [ // Gallery 2 (6 photos)
             // IMPORTANT: Replace these with actual paths to your 6 new images
-            'images/Bolos/bolo7.jpg', 'images/Bolos/bolo8.jpg', 'images/Bolos/docinho1.jpg',
-            'images/Bolos/docinho2.jpg', 'images/Bolos/docinho3.jpg', 'images/Bolos/docinho4.jpg'
+            'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg',
+            'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg'
         ]
         // Add more galleries here as needed, e.g.,
         // [ // Gallery 3 (e.g., 6 photos)
