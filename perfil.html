@@ -15,7 +15,7 @@
 <body>
     <header class="navbar navbar-expand-lg sticky-top p-4">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <img src="images/Logo/LOGOBRANCO.png" alt="Vagali Logo" class="navbar-logo me-2"> Vag<span class="span-logo">Ali</span>
             </a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu-navegacao">
@@ -164,7 +164,56 @@
                 <p class="text-white-50 small mb-0">&copy; 2025 VAGALI. Todos os direitos reservados. Local: São Gonçalo, RJ.</p>
             </div>
         </footer>
+<!-- Botão Flutuante -->
+<div id="supportButton" 
+     class="position-fixed bottom-0 end-0 m-4">
+    <button class="btn btn-lg rounded-circle shadow-lg btn-primary" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#chatWidget" 
+            aria-expanded="false" 
+            aria-controls="chatWidget">
+        <i class="bi bi-chat-dots fs-3"></i>
+    </button>
+</div>
+
+<!-- Janela do Chat -->
+<div id="chatWidget" 
+     class="collapse position-fixed bottom-0 end-0 m-4" 
+     style="width: 22rem; max-height: 28rem; z-index:1050;">
+    <div class="card shadow-lg border-0 h-100 d-flex flex-column">
         
+        <!-- Cabeçalho -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                    <i class="bi bi-robot fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0">Assistente Virtual</h6>
+                    <small>Online agora</small>
+                </div>
+            </div>
+            <button class="btn btn-sm btn-light" data-bs-toggle="collapse" data-bs-target="#chatWidget">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <!-- Corpo (Mensagens) -->
+        <div id="chatMessages" class="card-body overflow-auto bg-light flex-grow-1">
+            <div class="text-muted small">Inicie uma conversa...</div>
+        </div>
+
+        <!-- Rodapé (Input) -->
+        <div class="card-footer">
+            <div class="input-group">
+                <input id="messageInput" type="text" class="form-control" placeholder="Digite sua mensagem...">
+                <button id="sendMessage" class="btn btn-primary">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="scripts.js"></script>

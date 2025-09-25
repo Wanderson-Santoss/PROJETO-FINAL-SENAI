@@ -166,136 +166,138 @@ function clearCadastroForm() {
 //                                CHAT ESTATICO
 
 
- class ChatBot {
-            constructor() {
-                this.isOpen = false;
-                this.messageCount = 0;
-                this.responses = [
-                    "Olá! 👋 Como posso ajudá-lo hoje?",
-                    "Entendi! Deixe-me verificar isso para você...",
-                    "Posso ajudar com informações sobre nossos produtos e serviços.",
-                    "Para questões mais específicas, posso conectá-lo com um atendente humano.",
-                    "Há mais alguma coisa em que posso ajudar?",
-                    "Obrigado por entrar em contato! Estou aqui sempre que precisar.",
-                    "Vou anotar sua solicitação e nossa equipe entrará em contato em breve.",
-                    "Essa é uma ótima pergunta! Vou buscar as informações mais atualizadas."
-                ];
-                this.quickResponses = {
-                    'ola': 'Olá! Como posso ajudá-lo?',
-                    'oi': 'Oi! Em que posso ser útil?',
-                    'ajuda': 'Claro! Estou aqui para ajudar. O que você precisa?',
-                    'produto': 'Temos vários produtos disponíveis. Sobre qual você gostaria de saber?',
-                    'preço': 'Para informações sobre preços, posso conectá-lo com nossa equipe comercial.',
-                    'contato': 'Você pode nos contatar através deste chat ou pelo email contato@empresa.com',
-                    'horario': 'Nosso atendimento funciona 24/7 através deste chat!',
-                    'obrigado': 'De nada! Fico feliz em ajudar! 😊'
-                };
-                this.init();
-            }
+class ChatBot {
+    constructor() {
+        this.messageCount = 0;
+        this.responses = [
+            "Olá! 👋 Como posso ajudá-lo hoje?",
+            "Entendi! Deixe-me verificar isso para você...",
+            "Posso ajudar com informações sobre nossos produtos e serviços.",
+            "Para questões mais específicas, posso conectá-lo com um atendente humano.",
+            "Há mais alguma coisa em que posso ajudar?",
+            "Obrigado por entrar em contato! Estou aqui sempre que precisar.",
+            "Vou anotar sua solicitação e nossa equipe entrará em contato em breve.",
+            "Essa é uma ótima pergunta! Vou buscar as informações mais atualizadas."
+        ];
+        this.quickResponses = {
+            'ola': 'Olá! Como posso ajudá-lo?',
+            'oi': 'Oi! Em que posso ser útil?',
+            'ajuda': 'Claro! Estou aqui para ajudar. O que você precisa?',
+            'produto': 'Temos vários produtos disponíveis. Sobre qual você gostaria de saber?',
+            'preço': 'Para informações sobre preços, posso conectá-lo com nossa equipe comercial.',
+            'contato': 'Você pode nos contatar através deste chat ou pelo email contato@empresa.com',
+            'horario': 'Nosso atendimento funciona 24/7 através deste chat!',
+            'obrigado': 'De nada! Fico feliz em ajudar! 😊'
+        };
+        this.init();
+    }
 
-            init() {
-                this.bindEvents();
-            }
+    init() {
+        this.bindEvents();
+        this.bootstrapCollapse = new bootstrap.Collapse(document.getElementById('chatWidget'), { toggle: false });
+    }
 
-            bindEvents() {
-                document.getElementById('supportButton').addEventListener('click', () => this.openChat());
-                document.getElementById('closeChat').addEventListener('click', () => this.closeChat());
-                document.getElementById('sendMessage').addEventListener('click', () => this.sendUserMessage());
-                document.getElementById('messageInput').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') this.sendUserMessage();
-                });
-            }
+    bindEvents() {
+        // Abrir chat
+        document.querySelector('#supportButton button').addEventListener('click', () => this.openChat());
 
-            openChat() {
-                if (this.isOpen) return;
-                this.isOpen = true;
-                document.getElementById('supportButton').style.display = 'none';
-                document.getElementById('chatWidget').classList.remove('hidden');
-                setTimeout(() => this.addBotMessage("Olá! 👋 Bem-vindo ao nosso suporte! Como posso ajudá-lo hoje?"), 500);
-                setTimeout(() => this.addBotMessage("Você pode me perguntar sobre nossos produtos, serviços ou qualquer dúvida que tiver!"), 1500);
-            }
+        // Fechar chat (X)
+        document.querySelector('#chatWidget .btn-light').addEventListener('click', () => this.closeChat());
 
-            closeChat() {
-                this.isOpen = false;
-                document.getElementById('chatWidget').classList.add('hidden');
-                document.getElementById('supportButton').style.display = 'block';
-            }
+        // Enviar mensagem
+        document.getElementById('sendMessage').addEventListener('click', () => this.sendUserMessage());
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.sendUserMessage();
+        });
+    }
 
-            sendUserMessage() {
-                const input = document.getElementById('messageInput');
-                const message = input.value.trim();
-                if (!message) return;
-                this.addUserMessage(message);
-                input.value = '';
-                this.showTypingIndicator();
-                setTimeout(() => {
-                    this.hideTypingIndicator();
-                    this.generateBotResponse(message);
-                }, 1000 + Math.random() * 1000);
-            }
+    openChat() {
+        this.bootstrapCollapse.show();
+        setTimeout(() => this.addBotMessage("Olá! 👋 Bem-vindo ao nosso suporte! Como posso ajudá-lo hoje?"), 500);
+        setTimeout(() => this.addBotMessage("Você pode me perguntar sobre nossos produtos, serviços ou qualquer dúvida que tiver!"), 1500);
+    }
 
-            addUserMessage(message) {
-                const div = document.createElement('div');
-                div.className = 'mb-4 fade-in';
-                div.innerHTML = `<div class="flex justify-end"><div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">${message}</div></div>`;
-                document.getElementById('chatMessages').appendChild(div);
-                this.scrollToBottom();
-            }
+    closeChat() {
+        this.bootstrapCollapse.hide();
+        // Resetar mensagens do chat quando fechar
+        setTimeout(() => {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '<div class="text-muted small">Inicie uma conversa...</div>';
+            this.messageCount = 0;
+        }, 300); // espera animação do collapse
+    }
 
-            addBotMessage(message) {
-                const div = document.createElement('div');
-                div.className = 'mb-4 fade-in';
-                div.innerHTML = `
-                    <div class="flex items-start space-x-2">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div class="bg-white border rounded-lg px-4 py-2 max-w-xs shadow-sm">${message}</div>
-                    </div>`;
-                document.getElementById('chatMessages').appendChild(div);
-                this.scrollToBottom();
-            }
+    sendUserMessage() {
+        const input = document.getElementById('messageInput');
+        const message = input.value.trim();
+        if (!message) return;
+        this.addUserMessage(message);
+        input.value = '';
+        this.showTypingIndicator();
+        setTimeout(() => {
+            this.hideTypingIndicator();
+            this.generateBotResponse(message);
+        }, 1000 + Math.random() * 1000);
+    }
 
-            showTypingIndicator() {
-                const div = document.createElement('div');
-                div.id = 'typingIndicator';
-                div.className = 'mb-4 fade-in';
-                div.innerHTML = `
-                    <div class="flex items-start space-x-2">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div class="bg-white border rounded-lg px-4 py-2 shadow-sm">
-                            <div class="typing-indicator"><span></span><span></span><span></span></div>
-                        </div>
-                    </div>`;
-                document.getElementById('chatMessages').appendChild(div);
-                this.scrollToBottom();
-            }
+    addUserMessage(message) {
+        const div = document.createElement('div');
+        div.className = 'mb-4 fade-in';
+        div.innerHTML = `<div class="d-flex justify-content-end"><div class="bg-primary text-white rounded px-3 py-2" style="max-width: 80%">${message}</div></div>`;
+        document.getElementById('chatMessages').appendChild(div);
+        this.scrollToBottom();
+    }
 
-            hideTypingIndicator() {
-                const typing = document.getElementById('typingIndicator');
-                if (typing) typing.remove();
-            }
+    addBotMessage(message) {
+        const div = document.createElement('div');
+        div.className = 'mb-4 fade-in';
+        div.innerHTML = `
+            <div class="d-flex align-items-start mb-2">
+                <div class="w-8 h-8 bg-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-2">
+                    <i class="bi bi-robot text-white"></i>
+                </div>
+                <div class="bg-light border rounded px-3 py-2" style="max-width: 80%">${message}</div>
+            </div>`;
+        document.getElementById('chatMessages').appendChild(div);
+        this.scrollToBottom();
+    }
 
-            generateBotResponse(userMsg) {
-                const msg = userMsg.toLowerCase();
-                let reply = this.quickResponses[msg] || this.responses[Math.floor(Math.random() * this.responses.length)];
-                this.addBotMessage(reply);
-                this.messageCount++;
-                if (this.messageCount === 3) {
-                    setTimeout(() => this.addBotMessage("Se precisar de ajuda mais específica, posso conectá-lo com um atendente humano. Gostaria?"), 2000);
-                }
-            }
+    showTypingIndicator() {
+        const div = document.createElement('div');
+        div.id = 'typingIndicator';
+        div.className = 'mb-4 fade-in';
+        div.innerHTML = `
+            <div class="d-flex align-items-start mb-2">
+                <div class="w-8 h-8 bg-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-2">
+                    <i class="bi bi-robot text-white"></i>
+                </div>
+                <div class="bg-light border rounded px-3 py-2">
+                    <div class="typing-indicator"><span></span><span></span><span></span></div>
+                </div>
+            </div>`;
+        document.getElementById('chatMessages').appendChild(div);
+        this.scrollToBottom();
+    }
 
-            scrollToBottom() {
-                const container = document.getElementById('chatMessages');
-                container.scrollTop = container.scrollHeight;
-            }
+    hideTypingIndicator() {
+        const typing = document.getElementById('typingIndicator');
+        if (typing) typing.remove();
+    }
+
+    generateBotResponse(userMsg) {
+        const msg = userMsg.toLowerCase();
+        let reply = this.quickResponses[msg] || this.responses[Math.floor(Math.random() * this.responses.length)];
+        this.addBotMessage(reply);
+        this.messageCount++;
+        if (this.messageCount === 3) {
+            setTimeout(() => this.addBotMessage("Se precisar de ajuda mais específica, posso conectá-lo com um atendente humano. Gostaria?"), 2000);
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', () => new ChatBot());
+    scrollToBottom() {
+        const container = document.getElementById('chatMessages');
+        container.scrollTop = container.scrollHeight;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => new ChatBot());
