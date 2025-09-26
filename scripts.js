@@ -1,120 +1,84 @@
+/* ======================== FUNÇÃO PRINCIPAL ======================== */
+// Garante que o script só é executado após a página ser completamente carregada
 document.addEventListener('DOMContentLoaded', function() {
     
     // ====================== CARROSSEL PERSONALIZADO ======================
+    // Seleciona os elementos principais do carrossel
     const track = document.querySelector('.carousel-track');
-    let slides = Array.from(document.querySelectorAll('.img-slide'));
     const prevButton = document.getElementById('carousel-prev');
     const nextButton = document.getElementById('carousel-next');
 
-    // Inicializa com o índice da primeira imagem real, ignorando as clonadas
-    let currentIndex = 2; // O índice 2 é a primeira imagem original (Pedreiro)
+    // Verifica se os elementos do carrossel existem na página para evitar erros
+    if (track && prevButton && nextButton) {
+        let slides = Array.from(document.querySelectorAll('.img-slide'));
+        let currentIndex = 2; // O índice da imagem central que está em destaque
 
-    function updateCarousel() {
-        // Remove destaque de todas as imagens
-        slides.forEach(slide => {
-            slide.classList.remove('destaque-mid');
-        });
+        // Função para atualizar a posição do carrossel e o destaque da imagem
+        function updateCarousel() {
+            slides.forEach(slide => {
+                slide.classList.remove('destaque-mid');
+            });
+            
+            // Adiciona a classe de destaque à imagem central
+            slides[currentIndex].classList.add('destaque-mid');
+
+            // Calcula a posição do carrossel para centralizar a imagem em destaque
+            const containerWidth = track.parentElement.offsetWidth;
+            const middleImage = slides[currentIndex];
+            const middleImageWidth = middleImage.offsetWidth;
+            const totalPreviousWidth = slides.slice(0, currentIndex).reduce((acc, img) => acc + img.offsetWidth, 0);
+            const totalPreviousMargin = currentIndex * 20; // 20px de gap
+
+            const offset = (containerWidth / 2) - (middleImageWidth / 2) - totalPreviousWidth - totalPreviousMargin;
+            track.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Lógica para o loop infinito do carrossel
+        function handleNext() {
+            currentIndex++;
+            updateCarousel();
+            if (currentIndex > slides.length - 3) {
+                setTimeout(() => {
+                    track.style.transition = 'none';
+                    currentIndex = 2;
+                    updateCarousel();
+                }, 600);
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.6s ease-in-out';
+                }, 700);
+            }
+        }
         
-        // Adiciona destaque à imagem central (ajustado para a primeira imagem real)
-        slides[currentIndex].classList.add('destaque-mid');
-
-        // Calcula o offset para centralizar a imagem do meio
-        const containerWidth = track.parentElement.offsetWidth;
-        const middleImage = slides[currentIndex];
-        const middleImageWidth = middleImage.offsetWidth;
-        const totalPreviousWidth = slides.slice(0, currentIndex).reduce((acc, img) => acc + img.offsetWidth, 0);
-        const totalPreviousMargin = currentIndex * 15; // 15px de gap
-
-        const offset = (containerWidth / 2) - (middleImageWidth / 2) - totalPreviousWidth - totalPreviousMargin;
-        track.style.transform = `translateX(${offset}px)`;
-    }
-
-    function handleNext() {
-        currentIndex++;
-        updateCarousel();
-        // Se estiver no final das imagens originais, volta para o início
-        if (currentIndex > slides.length - 3) { // Ex: 10 imgs -> 12 no total. Se chegou no índice 9 (2ª dupl.), volta para 2
-            setTimeout(() => {
-                track.style.transition = 'none';
-                currentIndex = 2;
-                updateCarousel();
-            }, 600); // tempo da transição
-            // Adiciona a transição de volta depois de um pequeno atraso
-            setTimeout(() => {
-                track.style.transition = 'transform 0.6s ease-in-out';
-            }, 700);
+        function handlePrev() {
+            currentIndex--;
+            updateCarousel();
+            if (currentIndex < 2) {
+                setTimeout(() => {
+                    track.style.transition = 'none';
+                    currentIndex = slides.length - 3;
+                    updateCarousel();
+                }, 600);
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.6s ease-in-out';
+                }, 700);
+            }
         }
+
+        // Adiciona os eventos de clique aos botões de navegação
+        nextButton.addEventListener('click', handleNext);
+        prevButton.addEventListener('click', handlePrev);
+
+        // Inicia o carrossel e o mantém atualizado em redimensionamentos de tela
+        updateCarousel();
+        window.addEventListener('resize', updateCarousel);
+        setInterval(handleNext, 3000); // Roda automaticamente a cada 3 segundos
     }
     
-    function handlePrev() {
-        currentIndex--;
-        updateCarousel();
-        // Se estiver no início das imagens originais, vai para o final
-        if (currentIndex < 2) {
-            setTimeout(() => {
-                track.style.transition = 'none';
-                currentIndex = slides.length - 3;
-                updateCarousel();
-            }, 600); // tempo da transição
-            setTimeout(() => {
-                track.style.transition = 'transform 0.6s ease-in-out';
-            }, 700);
-        }
-    }
-
-    nextButton.addEventListener('click', handleNext);
-    prevButton.addEventListener('click', handlePrev);
-
-    // Inicia o carrossel na posição correta
-    updateCarousel();
-
-    // Adiciona um evento para recalcular a posição em redimensionamentos de tela
-    window.addEventListener('resize', updateCarousel);
-    
-    // Adiciona o carrossel automático
-    setInterval(handleNext, 3000); // Roda a função handleNext a cada 3 segundos
-
-
-
-    // ... (o restante do seu código JavaScript)
-
-function handleNext() {
-    currentIndex++;
-    updateCarousel();
-    // Se estiver no final das imagens originais, volta para o início
-    if (currentIndex > slides.length - 3) {
-        setTimeout(() => {
-            track.style.transition = 'none';
-            currentIndex = 2;
-            updateCarousel();
-        }, 600);
-        // Adiciona a transição de volta depois de um pequeno atraso
-        setTimeout(() => {
-            track.style.transition = 'transform 0.6s ease-in-out';
-        }, 700);
-    }
-}
-
-function handlePrev() {
-    currentIndex--;
-    updateCarousel();
-    // Se estiver no início das imagens originais, vai para o final
-    if (currentIndex < 2) {
-        setTimeout(() => {
-            track.style.transition = 'none';
-            currentIndex = slides.length - 3;
-            updateCarousel();
-        }, 600);
-        setTimeout(() => {
-            track.style.transition = 'transform 0.6s ease-in-out';
-        }, 700);
-    }
-}
-
     // ====================== GALERIA DE PRODUTOS ======================
     const productGallery = document.getElementById('productGallery');
     const galleryPagination = document.getElementById('galleryPagination');
 
+    // Define os caminhos das imagens para a galeria do perfil
     const galleries = [
         ['images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg'],
         ['images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg']
@@ -122,17 +86,19 @@ function handlePrev() {
 
     let currentGalleryIndex = 0;
 
+    // Função para renderizar as imagens na galeria
     function renderGallery(index) {
         if (!productGallery) return;
-        productGallery.innerHTML = '';
+        productGallery.innerHTML = ''; // Limpa a galeria para recarregar as novas imagens
         const imagesToLoad = galleries[index];
         if (!imagesToLoad) return;
         imagesToLoad.forEach(imagePath => {
             const colDiv = document.createElement('div');
-            colDiv.className = 'col-lg-2 col-md-3 col-4 mb-4'; 
+            // Classes de coluna do Bootstrap para o layout de 3x2 em telas grandes e 2x3 em telas pequenas
+            colDiv.className = 'col-lg-4 col-md-4 col-6 mb-4'; 
             const img = document.createElement('img');
             img.src = imagePath;
-            img.alt = 'Bolo';
+            img.alt = 'Imagem da galeria';
             img.className = 'img-fluid rounded';
             colDiv.appendChild(img);
             productGallery.appendChild(colDiv);
@@ -140,6 +106,7 @@ function handlePrev() {
         updatePagination(index);
     }
 
+    // Função para atualizar o estado dos botões da paginação
     function updatePagination(activeIndex) {
         if (!galleryPagination) return;
         const pageItems = galleryPagination.querySelectorAll('.page-item');
@@ -154,6 +121,7 @@ function handlePrev() {
         if (nextArrow) nextArrow.classList.toggle('disabled', activeIndex === galleries.length - 1);
     }
 
+    // Adiciona o evento de clique para a paginação da galeria
     if (galleryPagination) {
         galleryPagination.addEventListener('click', function(event) {
             const target = event.target.closest('.page-item');
@@ -177,13 +145,16 @@ function handlePrev() {
                 }
             }
         });
-        renderGallery(currentGalleryIndex);
+        renderGallery(currentGalleryIndex); // Renderiza a galeria inicial
     }
 
     // ====================== TRANSIÇÃO LOGIN/CADASTRO ======================
     const loginForm = document.getElementById('loginForm');
     const cadastroForm = document.getElementById('cadastroForm');
+    const showLoginBtn = document.getElementById('showLoginBtn');
+    const showCadastroBtn = document.getElementById('showCadastroBtn');
 
+    // Funções para mostrar e esconder formulários com um efeito de transição
     function showLogin() {
         if (cadastroForm) cadastroForm.style.display = 'none';
         if (loginForm) {
@@ -200,11 +171,15 @@ function handlePrev() {
         }
     }
 
+    // Adiciona os eventos de clique para os botões que alternam entre os formulários
+    if (showLoginBtn) showLoginBtn.addEventListener('click', showLogin);
+    if (showCadastroBtn) showCadastroBtn.addEventListener('click', showCadastro);
+
+    // Adiciona o listener de submit para os formulários
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const email = document.getElementById('loginEmail').value;
-            const senha = document.getElementById('loginSenha').value;
             alert(`Login realizado com sucesso!\nE-mail: ${email}`);
         });
     }
@@ -217,11 +192,6 @@ function handlePrev() {
             alert(`Cadastro realizado com sucesso!\nE-mail: ${email}\nTelefone: ${telefone}`);
         });
     }
-
-    const showLoginBtn = document.getElementById('showLoginBtn');
-    const showCadastroBtn = document.getElementById('showCadastroBtn');
-    if (showLoginBtn) showLoginBtn.addEventListener('click', showLogin);
-    if (showCadastroBtn) showCadastroBtn.addEventListener('click', showCadastro);
 
     // ====================== CHAT ESTATICO ======================
     class ChatBot {
