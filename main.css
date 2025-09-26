@@ -10,20 +10,24 @@
 body {
     background-color: var(--cor-fundo);
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Usando Roboto consistentemente */
 }
 
 /* ================= NAVBAR ================= */
 .navbar {
     background-color: var(--cor-principal);
-    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand .span-logo {
+    color: #c46034;
+    font-weight: 700;
 }
 
 .navbar-brand {
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif; /* Mantendo para o brand, se for intencional */
     font-size: 2rem;
     display: flex;
     align-items: center;
@@ -35,191 +39,497 @@ body {
 }
 
 .navbar-logo {
-    height: 60px;
-    width: auto;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
 }
 
-.nav .nav-link {
+.nav-link {
+    color: #575454;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #c46034;
+}
+
+.nav-link.active {
+    background-color: #c46034 !important;
+    color: white !important;
+}
+
+/* Botão de cadastro/login */
+.nav-link.cadastro-btn {
+    border: 1px solid #c46034;
+    border-radius: 5px;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+}
+
+.nav-link.cadastro-btn:hover {
+    background-color: #c46034;
     color: white;
-    font-weight: bold;
-    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.nav .nav-link.active,
-.nav .nav-link:hover {
-    background-color: white;
-    color: var(--cor-destaque);
-    border-radius: 8px;
+/* Barra de pesquisa */
+.search-bar-section {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.input-group #search-input {
+    border-radius: 50px !important;
+    border: 1px solid #c46034;
+    padding-left: 20px;
+}
+
+.input-group .btn-primary {
+    background-color: #c46034;
+    border-color: #c46034;
+    border-radius: 50px !important;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+
+.input-group .btn-primary:hover {
+    background-color: #a8512f;
+    border-color: #a8512f;
 }
 
 /* ================= CATEGORIAS ================= */
 .categorias {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin: 30px auto;
-    padding: 15px 0;
+    gap: 10px;
+    padding: 20px 0;
     flex-wrap: wrap;
     max-width: 90%;
+    margin: 0 auto;
 }
 
 .categoria-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 90px;
-    min-height: 100px;
-    padding: 10px;
-    background: none;
-    border: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
     text-align: center;
+    background-color: transparent;
+    border: none;
+    font-size: 0.9em;
+    color: #575454;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .categoria-btn i {
-    font-size: 30px;
+    font-size: 1.5em;
     color: var(--cor-principal);
-    margin-bottom: 6px;
-}
-
-.categoria-btn span {
-    font-size: 13px;
-    color: var(--cor-texto);
-    font-weight: 500;
-    text-align: center;
+    transition: color 0.3s ease;
+    margin-bottom: 5px;
 }
 
 .categoria-btn:hover {
-    background-color: rgba(142, 39, 14, 0.1);
+    transform: translateY(-5px);
+    color: #c46034;
 }
 
-.categoria-btn:hover i {
-    transform: scale(1.2);
-}
+/* ================= CAROUSEL - Estilos e Efeitos ================= */
 
-/* ================= CAROUSEL ================= */
+/* Estilos para o contêiner do carrossel */
 #carousel {
-    max-width: 90%; /* Mesma largura das categorias */
+    max-width: 90%;
     margin: 0 auto 40px auto;
 }
 
 #carousel .carousel-item .d-flex {
-    gap: 5px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Estilos base para todas as imagens do carrossel */
 #carousel .img-slide {
-    flex: 1;
-    height: 200px;
+    width: 20%; /* Padrão para 5 imagens */
+    height: 220px;
+    border-radius: 10px;
     object-fit: cover;
-    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
 }
 
-/* Controles do carousel */
-.carousel-control-prev,
-.carousel-control-next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8%;
-    opacity: 0.8;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+/* Estilo para a imagem central em destaque */
+#carousel .destaque-mid {
+    width: 30%; /* Aumenta a largura da imagem central */
+    height: 300px; /* Aumenta a altura para destacar */
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.4);
+/* Transição de arrastar suave */
+.carousel-item {
+    transition: transform 1s ease-in-out;
 }
 
-.carousel-indicators button {
-    background-color: var(--cor-principal);
-    border: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+.carousel-item-next:not(.carousel-item-start),
+.carousel-item-prev:not(.carousel-item-end) {
+    transform: translateX(100%);
 }
 
-.carousel-indicators button.active {
-    background-color: var(--cor-destaque);
+.carousel-item-prev:not(.carousel-item-end) {
+    transform: translateX(-100%);
 }
 
+.carousel-item.active {
+    transform: translateX(0);
+}
+
+/* ================= RESPONSIVIDADE ================= */
+
+/* TELAS GRANDES (992px a 1199px) - 3 imagens com destaque */
+@media (min-width: 992px) and (max-width: 1199px) {
+    #carousel .img-slide {
+        width: calc(33.333% - 6.66px); /* Ajusta para 3 imagens */
+        height: 200px;
+    }
+
+    #carousel .destaque-mid {
+        width: 45%;
+        height: 250px;
+    }
+}
+
+/* TABLETS (768px a 991px) - 2 imagens */
+@media (min-width: 768px) and (max-width: 991px) {
+    #carousel .img-slide {
+        width: calc(50% - 5px); /* Ajusta para 2 imagens */
+        height: 180px;
+    }
+
+    /* Oculta a imagem do meio para ter apenas 2 visíveis */
+    #carousel .img-slide:nth-child(3),
+    #carousel .img-slide:nth-child(4),
+    #carousel .img-slide:nth-child(5) {
+        display: none;
+    }
+}
+
+/* CELULAR (até 767px) - 1 imagem */
+@media (max-width: 767px) {
+    #carousel .img-slide {
+        width: 100%;
+        height: 150px;
+    }
+
+    /* Oculta as outras imagens para ter apenas 1 visível */
+    #carousel .img-slide:not(:first-child) {
+        display: none;
+    }
+}
 /* ================= PERFIS ================= */
 .perfis {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    margin-bottom: 40px auto;
-    padding: 15px 0;
-    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 0 20px;
+}
+
+.perfis-btn h2 {
+    font-weight: bold;
+    color: #3f3d3d;
+    transition: color 0.3s ease;
+}
+
+.perfis-btn:hover h2 {
+    color: #c46034;
 }
 
 .card-perfil {
-    background-color: #7a1c05f6;
-    color: #fff;
-    border-radius: 15px;
+    border: none;
+    background-color: #f8f8e0; /* Fundo para o card de perfil */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card-perfil:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-perfil .perfil-img { /* Seletor mais específico para a imagem do card de perfil */
+    width: 60px;
+    height: 60px;
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    border-radius: 50%;
+    border: 2px solid #c46034;
+    flex-shrink: 0;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: none;
+    padding: 10px 0 0;
+}
+
+.description-text a {
+    color: #c46034;
+    font-weight: 500;
+}
+
+/* Truncamento de texto para evitar estouro */
+.card-perfil .card-body h5, /* Para o título do perfil */
+.card-perfil .card-body p { /* Para a descrição */
+    white-space: normal; /* Permite que o texto quebre a linha normalmente */
+    word-wrap: break-word; /* Quebra palavras longas se não houver espaço */
+}
+
+.card-perfil .card-body .description-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    -webkit-box-orient: vertical;
+    display: box; /* Padrão para navegadores modernos */
+    line-clamp: 3;
+    box-orient: vertical;
+    max-height: 4.2em; /* Aproximadamente 1.4em por linha * 3 linhas */
+}
+
+
+/* TELA DE PERFIL */
+.perfil-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: #f8f8e0; /* Fundo do container para se diferenciar um pouco */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+.perfil-header {
+    display: flex;
+    align-items: center;
+    background-color: #5f5b5b;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #575454;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.perfil-img { /* Imagem grande do perfil na página de perfil */
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    margin-right: 30px;
+}
+
+.perfil-info {
+    flex-grow: 1;
+}
+
+.perfil-actions {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-    min-height: 250px;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* Imagem e texto do perfil */
-.card-perfil .perfil-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border: 3px solid #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    margin-bottom: 10px;
-}
-
-.card-perfil .description-text {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
-}
-
-.card-perfil .description-text a {
-    color: var(--cor-destaque);
-    text-decoration: none;
-}
-
-.card-perfil .card-footer {
-    margin-top: auto;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(255,255,255,0.3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: flex-end;
     gap: 5px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
 
-.card-perfil .card-footer button {
-    max-width: 100%; /* nunca ultrapassa o tamanho do card */
-    flex: 1 1 auto;  /* ocupa espaço restante, mas respeita limites */
-    text-align: center;
-    padding: 6px 10px; /* ajusta para caber em telas pequenas */
-    font-size: 0.9rem; /* menor em dispositivos móveis */
+.btn-follow {
+    background-color: white;
+    color: #3f3d3d;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.btn-follow:hover {
+    color: white;
+    background-color: #3f3d3d;
+}
+
+.estrelas-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.estrelas-header i {
+    color: gold;
+    font-size: 20px;
+}
+
+.estrelas-header strong {
+    color: white;
+    font-size: 1.1em;
+}
+
+.menu-options-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.feedbacks {
+    background-color: #e0d9b4; /* Fundo mais escuro para o container dos feedbacks */
+    padding: 15px;
+    border-radius: 10px;
+    color: #3f3d3d;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feedbacks h5 {
+    color: #3f3d3d;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.feedback {
+    background-color: #f8f8e0; /* Fundo para os cards de feedback */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.feedback p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.feedback strong {
+    color: #575454;
+}
+
+.feedback i {
+    color: gold;
+    font-size: 0.9rem;
+}
+
+.galeria img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.side-buttons .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #5f5b5b;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 12px 10px;
+}
+
+.side-buttons .btn:hover {
+    background-color: #3f3d3d;
+}
+
+.gallery-top-content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.gallery-inner-col {
+    flex-grow: 1;
+}
+
+.side-buttons-inner-col {
+    flex-shrink: 0;
+    width: 120px;
+    min-width: 120px;
+}
+
+.gallery-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-pagination .page-item {
+    background-color: #ddd;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+}
+
+.gallery-pagination .page-item:hover:not(.active):not(.disabled) {
+    background-color: #c46034;
+    color: white;
+}
+
+.gallery-pagination .page-item.active {
+    background-color: #c46034;
+    color: white;
+}
+
+.gallery-pagination .page-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.gallery-pagination .arrow {
+    font-size: 1.2rem;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+.col-md-7 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 /* ================= FOOTER ================= */
 .footer {
-    background-color: var(--cor-principal);
+    background-color: #5f5b5b;
     color: white;
-    padding: 40px 20px 30px 20px;
-    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.footer .social-links .social-icon:hover {
-    color: var(--cor-destaque);
+.footer .social-icon {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.footer .social-icon:hover {
+    color: #c46034;
+}
+
+.footer a {
+    color: #fff;
 }
 
 /* ======================= CHAT ======================= */
@@ -327,62 +637,44 @@ body {
 
 /* ================= RESPONSIVO ================= */
 
-/* CELULARES: 360px–390px */
-@media (max-width: 390px) {
-    .categorias {
-        max-width: 95%;
+/* CELULARES: Padrão, já configurado para 1 coluna pelo Bootstrap 'row-cols-1' */
+@media (max-width: 767px) { /* Tudo abaixo de tablet */
+    /* Ajustes específicos para o carrossel em telas muito pequenas */
+    #carousel .carousel-control-prev,
+    #carousel .carousel-control-next {
+        width: 15%; /* Botões de controle maiores para facilitar o toque */
+        opacity: 0.8;
     }
     #carousel .img-slide {
-        width: 100%;
-        height: 180px;
+        height: 150px; /* Altura um pouco menor para celulares */
     }
-    .carousel-item .d-flex {
-        flex-direction: column;
-    }
+
     .card-perfil {
         align-items: center;
         text-align: center;
         padding: 15px;
         min-height: auto;
     }
-}
-
-/* TABLETS: 768px–810px */
-@media (max-width: 810px) {
-    .categorias {
-        max-width: 90%;
-    }
-    #carousel .img-slide {
-        width: calc(33.33% - 5px);
-        height: 200px;
-    }
-    .carousel-item .d-flex {
-        flex-direction: row;
-    }
-    .card-perfil {
-        min-height: 270px;
-    }
-}
-
-/* DESKTOPS: 1366px–1920px */
-@media (max-width: 1920px) {
-    #carousel .img-slide {
-        height: 220px;
-        width: calc(25% - 5px);
-    }
-    .categorias {
-        max-width: 90%;
-    }
-}
-
-@media (max-width: 768px) {
     .card-perfil .card-footer {
-        flex-direction: column; /* botão abaixo das estrelas */
+        flex-direction: column;
         align-items: center;
         gap: 10px;
     }
-
     .card-perfil .card-footer button {
-        width: 80%; /* ocupa boa parte do card, mas nunca estoura */
+        width: 80%;
+    }
+}
+
+/* TABLETS: 768px a 991px (padrão Bootstrap md) */
+@media (min-width: 768px) and (max-width: 991px) {
+    #carousel .img-slide {
+        height: 180px; /* Altura para tablets */
+    }
+}
+
+/* DESKTOPS: 992px e acima (padrão Bootstrap lg) */
+@media (min-width: 992px) {
+    #carousel .img-slide {
+        height: 220px; /* Altura para desktops */
     }
 }
