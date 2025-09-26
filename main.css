@@ -1,12 +1,23 @@
+/* ================= VARIÁVEIS ================= */
+:root {
+    --cor-principal: #8E270E;
+    --cor-destaque: orange;
+    --cor-fundo: #fdfbdd98;
+    --cor-texto: #333;
+}
+
+/* ================= GLOBAL ================= */
 body {
+    background-color: var(--cor-fundo);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Roboto sans-serif;
+    font-family: Roboto, sans-serif;
 }
-/* NAVBAR */
+
+/* ================= NAVBAR ================= */
 .navbar {
-    background-color: #8E270E;
+    background-color: var(--cor-principal);
     padding: 1rem 0;
 }
 
@@ -14,26 +25,18 @@ body {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2rem;
+    display: flex;
+    align-items: center;
     transition: color 0.3s ease;
-    display: flex; /* Adicionado para alinhar o logo e o texto */
-    align-items: center; /* Centraliza verticalmente o logo com o texto */
 }
 
 .navbar-brand:hover {
-    color: orange;
+    color: var(--cor-destaque);
 }
 
 .navbar-logo {
-    height: 200px; /* Ajuste a altura para o tamanho desejado do logo */
-    width: auto; /* Mantém a proporção da imagem */
-}
-
-.navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    height: 60px;
+    width: auto;
 }
 
 .nav .nav-link {
@@ -45,61 +48,19 @@ body {
 .nav .nav-link.active,
 .nav .nav-link:hover {
     background-color: white;
-    color: orange;
+    color: var(--cor-destaque);
     border-radius: 8px;
 }
 
-
-.span-logo{
-    color: orange;
-}
-
-/* Seção da barra de pesquisa */
-.search-bar-section {
-    background-color: #f8f9fa; /* Um tom de fundo leve para a seção de pesquisa */
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e9ecef; /* Linha sutil abaixo da barra de pesquisa */
-}
-
-
-/* Ajustes para o input de pesquisa */
-.search-bar-section .form-control {
-    border-color: #8E270E;
-    box-shadow: none; /* Remove a sombra padrão do Bootstrap para um visual mais limpo */
-}
-
-
-.search-bar-section .form-control:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
-}
-
-
-/* Ajuste para o botão de pesquisa */
-.search-bar-section .btn-primary {
-    background-color: #8E270E;
-    border-color: orange;
-}
-
-
-.search-bar-section .btn-primary:hover {
-    background-color: #884a4a;
-    border-color: #8E270E;
-}
-
-
-
-/* Estilização do menu de botoes categorias */
-
+/* ================= CATEGORIAS ================= */
 .categorias {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Aumentei um pouco o gap para melhor espaçamento em telas maiores */
-    margin: 30px auto; /* Margem superior e inferior, e auto para centralizar */
-    padding: 15px 0; /* Padding vertical, padding horizontal 0 */
+    gap: 15px;
+    margin: 30px auto;
+    padding: 15px 0;
     flex-wrap: wrap;
-    max-width: 90%; /* Limita a largura para centralizar em telas muito grandes */
+    max-width: 90%;
 }
 
 .categoria-btn {
@@ -119,21 +80,16 @@ body {
 
 .categoria-btn i {
     font-size: 30px;
-    color: #8E270E;
+    color: var(--cor-principal);
     margin-bottom: 6px;
 }
 
 .categoria-btn span {
     font-size: 13px;
-    color: #333;
+    color: var(--cor-texto);
     font-weight: 500;
-    max-width: 80px;
-    word-wrap: break-word;
-    line-height: 1.2;
-    white-space: normal;
     text-align: center;
 }
-
 
 .categoria-btn:hover {
     background-color: rgba(142, 39, 14, 0.1);
@@ -143,122 +99,53 @@ body {
     transform: scale(1.2);
 }
 
-
-/* Ajustes de tamanhos e transições do slide */
+/* ================= CAROUSEL ================= */
 #carousel {
-    margin-bottom: 40px; /* Espaço abaixo do carrossel */
+    max-width: 90%; /* Mesma largura das categorias */
+    margin: 0 auto 40px auto;
 }
 
-.img-slide {
-    flex: 1;  /* ajustar as imagens com espoçamento de 1px */
-    max-width: 100%;
-    height: auto; /* ajuste como quiser */
+#carousel .carousel-item .d-flex {
+    gap: 5px;
+}
+
+#carousel .img-slide {
+    flex: 1;
+    height: 200px;
     object-fit: cover;
-    margin-right: 5px;
+    border-radius: 8px;
 }
 
-
-.img-slide:last-child {
-  margin-right: 0;
-}
-
-
-/* Mantém os controles no centro vertical da imagem */
+/* Controles do carousel */
 .carousel-control-prev,
 .carousel-control-next {
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8%;
-  opacity: 0.8;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8%;
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
-
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.4);
 }
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 30px; 
-    height: 30px;
-}
-
-
 
 .carousel-indicators button {
-    background-color: #8E270E; /* Cor do tema para os indicadores */
+    background-color: var(--cor-principal);
     border: none;
-    width: 10px; /* Tamanho dos indicadores */
+    width: 10px;
     height: 10px;
-    border-radius: 50%; /* Redondo */
-    margin: 0 5px;
+    border-radius: 50%;
 }
 
 .carousel-indicators button.active {
-    background-color: orange; /* Cor do indicador ativo */
+    background-color: var(--cor-destaque);
 }
 
-
-
-/* Ajusta o espaçamento das imagens dentro dos slides para telas menores */
-@media (max-width: 768px) {
-    .carousel-item .d-flex img {
-        width: 50%; /* Em telas médias, 2 imagens por linha */
-        height: 200px;
-    }
-}
-
-@media (max-width: 576px) {
-    .carousel-item .d-flex img {
-        width: 100%; /* Em telas pequenas, 1 imagem por linha */
-        height: 180px;
-        margin-right: 0;
-        margin-bottom: 5px; /* Adiciona margem abaixo em telas pequenas */
-    }
-    /* Para telas muito pequenas, o d-flex precisa se comportar como coluna */
-    .carousel-item .d-flex {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-
-/* Ajustes específicos para tablets */
-@media (max-width: 992px) {
-    .img-slide {
-        height: 220px;
-    }
-}
-
-/* Ajustes específicos para celulares */
-@media (max-width: 576px) {
-    .img-slide {
-        height: 160px;
-        width: 100%;  /* ocupa a largura toda */
-        margin-right: 0;
-    }
-}
-
-
-
-/* Quebra de espaço para tablets */
-@media (max-width: 992px) {
-    .perfis {
-        gap: 15px; /* menos espaço em tablets */
-    }
-    .card-perfil {
-        min-height: auto; /* deixa altura flexível */
-    }
-}
-
-
-/* Perfis */
-
-
+/* ================= PERFIS ================= */
 .perfis {
     display: flex;
     justify-content: center;
@@ -268,258 +155,74 @@ body {
     flex-wrap: wrap;
 }
 
-.perfis-btn {
-    background-color: transparent;
-    border: 2px solid #8E270E;
-    color: #8E270E;
-    padding: 12px 25px; 
-    border-radius: 30px; 
-    font-size: 1.1rem; 
-    font-weight: bold;
-    transition: all 0.3s ease;
-    text-transform: uppercase; 
-    min-width: 160px; 
-    text-align: center;
-}
-
-
-.perfis-btn h1{
-    color: #884a4a; /* Cor dos ícones*/
-
-
-    transition: transform 0.3s;
-}
-
-.perfis-btn:hover {
-    background-color: #8E270E;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Sombra mais pronunciada no hover */
-}
-
-
-
-/* ================= CARDS DE PERFIL ================= */
-
-/* Regras principais */
 .card-perfil {
-    background-color: #8E270E; /* Cor de fundo */
-    color: #ffffff;
+    background-color: #7a1c05f6;
+    color: #fff;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100%; /* 🔥 força todos os cards a terem mesma altura */
+    height: 100%;
     min-height: 250px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    overflow: hidden;
     padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Imagem de perfil */
+/* Imagem e texto do perfil */
 .card-perfil .perfil-img {
     width: 80px;
     height: 80px;
     object-fit: cover;
     border: 3px solid #fff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
 }
 
-/* Texto da descrição */
 .card-perfil .description-text {
-    flex-grow: 1; /* 🔥 empurra o rodapé para o fim */
+    flex-grow: 1;
     font-size: 0.9rem;
     line-height: 1.4;
     margin-bottom: 0.5rem;
 }
 
 .card-perfil .description-text a {
-    color: orange;
+    color: var(--cor-destaque);
     text-decoration: none;
 }
 
-.card-perfil .description-text a:hover {
-    text-decoration: underline;
-}
-
-/* Rodapé (estrelas + botão) */
 .card-perfil .card-footer {
-    margin-top: auto; /* 🔥 garante que fique no final */
+    margin-top: auto;
     padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255,255,255,0.3);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
-.card-perfil .stars i {
-    color: yellow;
-}
-
-/* ================= RESPONSIVIDADE ================= */
-
-/* Tablets e telas médias */
-@media (max-width: 992px) {
-    .card-perfil {
-        min-height: 270px;
-    }
-    .card-perfil .description-text {
-        font-size: 0.85rem;
-    }
-}
-
-/* Celulares pequenos */
-@media (max-width: 576px) {
-    .card-perfil {
-        align-items: center;
-        text-align: center;
-        padding: 20px !important;
-        min-height: auto;
-    }
-
-    .card-perfil .d-flex.align-items-center.mb-3 {
-        flex-direction: column;
-        text-align: center;
-        margin-bottom: 15px !important;
-    }
-
-    .card-perfil .perfil-img {
-        margin-right: 0 !important;
-        margin-bottom: 10px;
-    }
-
-    .card-perfil .card-footer {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        padding-top: 15px !important;
-    }
-
-    .card-perfil .stars {
-        justify-content: center;
-        width: 100%;
-    }
-
-    .card-perfil button.btn {
-        width: 80%;
-        max-width: 200px;
-    }
+.card-perfil .card-footer button {
+    max-width: 100%; /* nunca ultrapassa o tamanho do card */
+    flex: 1 1 auto;  /* ocupa espaço restante, mas respeita limites */
+    text-align: center;
+    padding: 6px 10px; /* ajusta para caber em telas pequenas */
+    font-size: 0.9rem; /* menor em dispositivos móveis */
 }
 
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 .footer {
-    background-color: #8E270E; /* Cor de fundo principal do seu tema */
+    background-color: var(--cor-principal);
     color: white;
-    padding-top: 40px; /* Mais padding no topo */
-    padding-bottom: 30px; /* Padding na parte inferior */
-}
-
-.footer h5 {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.footer .list-unstyled li {
-    margin-bottom: 8px; /* Espaço entre os itens da lista */
-}
-
-.footer .list-unstyled a {
-    color: rgba(255, 255, 255, 0.7); /* Links com um tom de branco mais suave */
-    transition: color 0.3s ease;
-}
-
-.footer .list-unstyled a:hover {
-    color: orange; /* Cor de destaque no hover */
-    text-decoration: none;
-}
-
-.footer .social-links .social-icon {
-    color: white;
-    font-size: 1.8rem; /* Tamanho dos ícones sociais */
-    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 40px 20px 30px 20px;
+    text-align: center;
 }
 
 .footer .social-links .social-icon:hover {
-    color: orange; /* Cor de destaque no hover */
-    transform: translateY(-3px); /* Pequeno efeito de levantar */
+    color: var(--cor-destaque);
 }
 
-.footer-divider {
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória suave */
-}
-
-.footer p.small {
-    font-size: 0.85rem; /* Fonte menor para informações de direitos autorais */
-    color: rgba(255, 255, 255, 0.6) !important; /* Mais suave */
-}
-
-
-
-
-/* Media Query para responsividade do rodapé */
-
-@media (max-width: 768px) {
-    .footer {
-        text-align: center;
-    }
-    .footer .social-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .footer .col-md-4 {
-        text-align: center; /* Centraliza o texto das colunas em telas menores */
-    }
-    .footer .list-unstyled {
-        padding-left: 0; /* Remove o padding padrão da lista em telas pequenas */
-    }
-}
-
-
-/* Cadastro */
-.container-cadastro {
-    width: 100%;
-    max-width: 600px; 
-    padding: 30px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-    background-color: #fff;
-    border-radius: 8px;
-}
-
-.form-control {
-    padding: 15px; 
-    font-size: 15px; 
-}
-
-h1 {
-    font-size: 25px;
-}
-
-
-.btn {
-    padding: 10px 20px;
-    font-size:15px;
-}
-
-
-/* Animação de transição entre telas */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease-in;
-}
-
-
-
-/*          CHAT ESTATICO            */
-/* ANIMAÇÕES DO CHAT */
-
-/* Respiração / flutuação do botão do chat */
+/* ======================= CHAT ======================= */
 @keyframes bounce-gentle {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
@@ -527,21 +230,6 @@ h1 {
 
 .bounce-gentle {
     animation: bounce-gentle 2s infinite;
-}
-
-/* Fade-in para mensagens do chat */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 0.3s ease-out;
-}
-
-/* Indicador de digitação */
-.typing-indicator {
-    display: inline-block;
 }
 
 .typing-indicator span {
@@ -562,7 +250,6 @@ h1 {
     40% { transform: scale(1); opacity: 1; }
 }
 
-/* Opcional: estilo do botão flutuante do chat */
 #supportButton {
     position: fixed;
     bottom: 20px;
@@ -570,18 +257,16 @@ h1 {
     z-index: 1050;
 }
 
-
-        /* ================= CHAT AJUSTADO ================= */
 .chat-container {
     position: fixed;
-    bottom: 80px; /* acima do botão */
+    bottom: 80px;
     right: 20px;
     width: 320px;
     max-width: 90%;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    display: none; /* começa fechado */
+    display: none;
     flex-direction: column;
     overflow: hidden;
     z-index: 9999;
@@ -638,4 +323,66 @@ h1 {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     z-index: 10000;
+}
+
+/* ================= RESPONSIVO ================= */
+
+/* CELULARES: 360px–390px */
+@media (max-width: 390px) {
+    .categorias {
+        max-width: 95%;
+    }
+    #carousel .img-slide {
+        width: 100%;
+        height: 180px;
+    }
+    .carousel-item .d-flex {
+        flex-direction: column;
+    }
+    .card-perfil {
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+        min-height: auto;
+    }
+}
+
+/* TABLETS: 768px–810px */
+@media (max-width: 810px) {
+    .categorias {
+        max-width: 90%;
+    }
+    #carousel .img-slide {
+        width: calc(33.33% - 5px);
+        height: 200px;
+    }
+    .carousel-item .d-flex {
+        flex-direction: row;
+    }
+    .card-perfil {
+        min-height: 270px;
+    }
+}
+
+/* DESKTOPS: 1366px–1920px */
+@media (max-width: 1920px) {
+    #carousel .img-slide {
+        height: 220px;
+        width: calc(25% - 5px);
+    }
+    .categorias {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-perfil .card-footer {
+        flex-direction: column; /* botão abaixo das estrelas */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .card-perfil .card-footer button {
+        width: 80%; /* ocupa boa parte do card, mas nunca estoura */
+    }
 }

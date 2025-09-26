@@ -1,16 +1,15 @@
 /* TELA DE PERFIL */
 
-
-
     body {
-      background-color: white;
+      background-color: #fdfbdd98;
       font-family: Arial, sans-serif;
     }
     .perfil-container {
       max-width: 1000px;
       margin: 40px auto;
-      background-color: white;
+      background-color: #fdfbdd98;
       border-radius: 10px;
+    
       overflow: hidden;
       padding: 20px;
       position: relative; 
@@ -18,10 +17,11 @@
     .perfil-header {
       display: flex;
       align-items: center;
-      background-color: #6c757d;
+      background-color: #5f5b5b;
       color: white;
       padding: 20px;
       border-radius: 10px;
+      border: 2px solid #575454;
       position: relative;
       margin-bottom: 20px;
     }
@@ -46,8 +46,8 @@
         top: 20px;
     }
     .btn-follow {
-      background-color: #8E270E;
-      color: white;
+      background-color: white;
+      color: #3f3d3d;
       font-weight: bold;
       border: none;
       border-radius: 20px;
@@ -56,8 +56,8 @@
     }
 
     .btn-follow:hover{
-      color: #8E270E;
-      background-color: white;
+      color: white;
+      background-color: #3f3d3d;
     }
 
     .estrelas-header { 
@@ -91,21 +91,22 @@
     }
 
     .feedbacks {
-      background-color: #8E270E;
+      background-color: #faf6d2;
       padding: 15px;
       border-radius: 10px;
-      color: white;
+      color: #f7ecec;
       min-height: 400px; /* Adjusted to visually match gallery height */
       display: flex;
       flex-direction: column;
       gap: 15px; /* Space between feedback items */
     }
     .feedbacks h5 {
+      color: white;
       font-weight: bold;
       margin-bottom: 0; /* Remove default margin from h5 */
     }
     .feedback {
-        background-color: rgba(255, 255, 255, 0.295); /* Slightly transparent white for feedback items */
+        background-color: rgba(133, 37, 20, 0.918); /* Slightly transparent white for feedback items */
         padding: 10px;
         border-radius: 8px;
     }
@@ -114,7 +115,7 @@
       margin-bottom: 5px; /* Adjust margin for paragraphs within feedback */
     }
     .feedback strong {
-        color: #ddd;
+        color: #c9bfbf;
     }
     .feedback i {
         color: gold;
@@ -131,7 +132,7 @@
       display: block;
       width: 100%;
       margin-bottom: 10px;
-      background-color: #6c757d;
+      background-color: #5f5b5b;
       color: white;
       font-weight: bold;
       border: none;
@@ -139,7 +140,7 @@
     }
 
     .side-buttons .btn:hover  {
-      background-color: #8E270E;
+      background-color: #3f3d3d;
     }
     .side-buttons {
       margin-top: 0; /* Align with gallery */
