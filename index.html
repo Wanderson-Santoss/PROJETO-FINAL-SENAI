@@ -189,126 +189,213 @@
 
 
    
-    <section class="">
-        <div class="perfis pt-20px">
-            <button class="perfis-btn btn btn-outline btn-lg">
-                <h2>Destaques</h2>
-
-
-            <button class="perfis-btn btn btn-outline btn-lg">
-                <h2>Promoções</h2>
-
-
-            <button class="perfis-btn btn btn-outline btn-sm">
-                <h2>Diponíveis</h2>
-   
-        </div>
-    </section>
-
-
 <section class="container my-5">
-    <div class="row g-4">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/Perfil/confeiteira.jpg" alt="Juliana Doces" class="rounded-circle perfil-img me-3">
-                    <div>
-                        <h6 class="text-uppercase fw-bold mb-0">Confeiteira</h6>
-                        <p class="mb-0 fw-semibold">Juliana Doces</p>
-                        <p class="text-muted small mb-1">Rio de Janeiro, Brasil</p>
+    <div class="d-flex justify-content-center my-4 button-group">
+        <button class="btn btn-filter active" data-target="destaques">Destaques</button>
+        <button class="btn btn-filter" data-target="promocoes">Promoções</button>
+        <button class="btn btn-filter" data-target="disponiveis">Disponíveis</button>
+    </div>
+
+    <div id="section-destaques" class="container card-section">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/Perfil/confeiteira.jpg" alt="Juliana Doces" class="rounded-circle perfil-img me-3">
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Confeiteira</h6>
+                            <p class="mb-0 fw-semibold">Juliana Doces</p>
+                            <p class="text-muted small mb-1">Rio de Janeiro, Brasil</p>
+                        </div>
+                    </div>
+                    <p class="small mb-2 description-text">Especialista em doces para casamentos, bolos, tortas e outros <a href="./perfil.html" target="_blank">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="stars d-flex align-items-center gap-1">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <span class="fw-bold ms-1">5/5</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">+ Seguir</button>
                     </div>
                 </div>
-                <p class="small mb-2 description-text">Especialista em doces para casamentos, bolos, tortas e outros <a href="./perfil.html" target="_blank">ler mais...</a></p>
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <div class="stars d-flex align-items-center gap-1">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <span class="fw-bold ms-1">5/5</span>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/Perfil/eletricista.jpg" alt="Carlos Mendes" class="rounded-circle perfil-img me-3">
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Eletricista</h6>
+                            <p class="mb-0 fw-semibold">Carlos Mendes</p>
+                            <p class="text-muted small mb-1">São Paulo, Brasil</p>
+                        </div>
                     </div>
-                    <button class="btn btn-dark btn-sm">+ Seguir</button>
+                    <p class="small mb-2 description-text">Instalações e manutenções prediais com certificação <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="stars d-flex align-items-center gap-1">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                            <span class="fw-bold ms-1">4/5</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">+ Seguir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/Perfil/cabelereira.jpg" alt="Ana Costa" class="rounded-circle perfil-img me-3">
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Cabeleireira</h6>
+                            <p class="mb-0 fw-semibold">Ana Costa</p>
+                            <p class="text-muted small mb-1">Belo Horizonte, Brasil</p>
+                        </div>
+                    </div>
+                    <p class="small mb-2 description-text">Especializada em cortes modernos e coloração <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="stars d-flex align-items-center gap-1">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                            <span class="fw-bold ms-1">3.5/5</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">+ Seguir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/Perfil/carpinteiro.jpg" alt="Roberto Dias" class="rounded-circle perfil-img me-3">
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Carpinteiro</h6>
+                            <p class="mb-0 fw-semibold">Roberto Dias</p>
+                            <p class="text-muted small mb-1">Curitiba, Brasil</p>
+                        </div>
+                    </div>
+                    <p class="small mb-2 description-text">Móveis sob medida e reparos em madeira <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="stars d-flex align-items-center gap-1">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                            <span class="fw-bold ms-1">3.5/5</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">+ Seguir</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/Perfil/eletricista.jpg" alt="Carlos Mendes" class="rounded-circle perfil-img me-3">
-                    <div>
-                        <h6 class="text-uppercase fw-bold mb-0">Eletricista</h6>
-                        <p class="mb-0 fw-semibold">Carlos Mendes</p>
-                        <p class="text-muted small mb-1">São Paulo, Brasil</p>
+    <div id="section-promocoes" class="container card-section d-none">
+        <div class="row g-4">
+            </div>
+    </div>
+    
+    <div id="section-disponiveis" class="container card-section d-none">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-tools fs-4 me-3 text-primary"></i>
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Serviço de Eletricista</h6>
+                            <p class="mb-0 fw-semibold">Preciso de ajuda urgente!</p>
+                            <p class="text-muted small mb-1">Rio de Janeiro, Brasil</p>
+                        </div>
                     </div>
-                </div>
-                <p class="small mb-2 description-text">Instalações e manutenções prediais com certificação <a href="#">ler mais...</a></p>
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <div class="stars d-flex align-items-center gap-1">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
-                        <span class="fw-bold ms-1">4/5</span>
+                    <p class="small mb-2 description-text">Instalação de novas tomadas em sala comercial. Preciso de um profissional disponível. <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="price-info">
+                            <span class="fw-bold me-2">Orçamento:</span>
+                            <span>R$ 200,00</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">Propor</button>
                     </div>
-                    <button class="btn btn-dark btn-sm">+ Seguir</button>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/Perfil/cabelereira.jpg" alt="Ana Costa" class="rounded-circle perfil-img me-3">
-                    <div>
-                        <h6 class="text-uppercase fw-bold mb-0">Cabeleireira</h6>
-                        <p class="mb-0 fw-semibold">Ana Costa</p>
-                        <p class="text-muted small mb-1">Belo Horizonte, Brasil</p>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-house-door fs-4 me-3 text-success"></i>
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Limpeza de Casa</h6>
+                            <p class="mb-0 fw-semibold">Procuro profissional para dia 28/09</p>
+                            <p class="text-muted small mb-1">São Paulo, Brasil</p>
+                        </div>
                     </div>
-                </div>
-                <p class="small mb-2 description-text">Especializada em cortes modernos e coloração <a href="#">ler mais...</a></p>
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <div class="stars d-flex align-items-center gap-1">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-half text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
-                        <span class="fw-bold ms-1">3.5/5</span>
+                    <p class="small mb-2 description-text">Limpeza completa de apartamento de 2 quartos no centro da cidade. <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="price-info">
+                            <span class="fw-bold me-2">Orçamento:</span>
+                            <span>R$ 250,00</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">Propor</button>
                     </div>
-                    <button class="btn btn-dark btn-sm">+ Seguir</button>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/Perfil/carpinteiro.jpg" alt="Roberto Dias" class="rounded-circle perfil-img me-3">
-                    <div>
-                        <h6 class="text-uppercase fw-bold mb-0">Carpinteiro</h6>
-                        <p class="mb-0 fw-semibold">Roberto Dias</p>
-                        <p class="text-muted small mb-1">Curitiba, Brasil</p>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-paint-bucket fs-4 me-3 text-danger"></i>
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Serviço de Pintor</h6>
+                            <p class="mb-0 fw-semibold">Pintura de sala e cozinha</p>
+                            <p class="text-muted small mb-1">Belo Horizonte, Brasil</p>
+                        </div>
+                    </div>
+                    <p class="small mb-2 description-text">Preciso de um profissional para pintar dois cômodos. <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="price-info">
+                            <span class="fw-bold me-2">Orçamento:</span>
+                            <span>Valor a Negociar</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">Propor</button>
                     </div>
                 </div>
-                <p class="small mb-2 description-text">Móveis sob medida e reparos em madeira <a href="#">ler mais...</a></p>
-                <div class="card-footer d-flex justify-content-between align-items-center">
-                    <div class="stars d-flex align-items-center gap-1">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-half text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
-                        <span class="fw-bold ms-1">3.5/5</span>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-screwdriver fs-4 me-3 text-info"></i>
+                        <div>
+                            <h6 class="text-uppercase fw-bold mb-0">Montagem de Móveis</h6>
+                            <p class="mb-0 fw-semibold">Ajuda com um armário</p>
+                            <p class="text-muted small mb-1">Curitiba, Brasil</p>
+                        </div>
                     </div>
-                    <button class="btn btn-dark btn-sm">+ Seguir</button>
+                    <p class="small mb-2 description-text">Preciso de um profissional para montar um guarda-roupa. <a href="#">ler mais...</a></p>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="price-info">
+                            <span class="fw-bold me-2">Orçamento:</span>
+                            <span>R$ 150,00</span>
+                        </div>
+                        <button class="btn btn-dark btn-sm">Propor</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 <footer class="footer mt-5 py-4" id="rodape">
     <div class="container text-center">
         <div class="row">

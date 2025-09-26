@@ -193,6 +193,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // ====================== LÓGICA DO FILTRO DE CARDS ======================
+    const filterButtons = document.querySelectorAll('.btn-filter');
+    const sections = {
+        'destaques': document.getElementById('section-destaques'),
+        'promocoes': document.getElementById('section-promocoes'),
+        'disponiveis': document.getElementById('section-disponiveis')
+    };
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const target = button.dataset.target;
+
+            // Remove a classe 'active' de todos os botões e adiciona ao clicado
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Oculta todas as seções e mostra apenas a seção alvo
+            for (const key in sections) {
+                if (sections[key]) {
+                    if (key === target) {
+                        sections[key].classList.remove('d-none');
+                    } else {
+                        sections[key].classList.add('d-none');
+                    }
+                }
+            }
+        });
+    });
+    
     // ====================== CHAT ESTATICO ======================
     class ChatBot {
         constructor() {
