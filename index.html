@@ -158,41 +158,30 @@
 
     <!--Começo do Carousel/slides -->
 <section id="sobre-vagali">
-    <div id="carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-center align-items-center">
-                    <img src="images/Slide/Pedreiro.jpg" alt="Pedreiro" class="img-slide" />
-                    <img src="images/Slide/professor.jpg" alt="Professora" class="img-slide" />
-                    <img src="images/Slide/domestica.jpg" alt="Domestica" class="img-slide destaque-mid" />
-                    <img src="images/Slide/cabelereira.jpg" alt="Cabelereira" class="img-slide" />
-                    <img src="images/Slide/eletricista.jpg" alt="Eletricista" class="img-slide" />
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center">
-                    <img src="images/Slide/carpinteiro.jpg" alt="Carpinteiro" class="img-slide" />
-                    <img src="images/Slide/manicure.jpg" alt="Manicure" class="img-slide" />
-                    <img src="images/Slide/mecanico.jpg" alt="Mecanico" class="img-slide destaque-mid" />
-                    <img src="images/Slide/Pedreiro.jpg" alt="Pedreiro" class="img-slide" />
-                    <img src="images/Slide/professor.jpg" alt="Professora" class="img-slide" />
-                </div>
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
+    <div id="carousel-custom" class="carousel">
+        <button id="carousel-prev" class="carousel-control-prev" type="button">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
+        <button id="carousel-next" class="carousel-control-next" type="button">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Próximo</span>
         </button>
+        <div class="carousel-track">
+            <img src="images/Slide/domestica.jpg" alt="Domestica" class="img-slide" />
+            <img src="images/Slide/cabelereira.jpg" alt="Cabelereira" class="img-slide" />
 
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <img src="images/Slide/Pedreiro.jpg" alt="Pedreiro" class="img-slide" data-index="0" />
+            <img src="images/Slide/professor.jpg" alt="Professora" class="img-slide" data-index="1" />
+            <img src="images/Slide/domestica.jpg" alt="Domestica" class="img-slide" data-index="2" />
+            <img src="images/Slide/cabelereira.jpg" alt="Cabelereira" class="img-slide" data-index="3" />
+            <img src="images/Slide/eletricista.jpg" alt="Eletricista" class="img-slide destaque-mid" data-index="4" />
+            <img src="images/Slide/carpinteiro.jpg" alt="Carpinteiro" class="img-slide" data-index="5" />
+            <img src="images/Slide/manicure.jpg" alt="Manicure" class="img-slide" data-index="6" />
+            <img src="images/Slide/mecanico.jpg" alt="Mecanico" class="img-slide" data-index="7" />
+            
+            <img src="images/Slide/Pedreiro.jpg" alt="Pedreiro" class="img-slide" />
+            <img src="images/Slide/professor.jpg" alt="Professora" class="img-slide" />
         </div>
     </div>
 </section>
