@@ -390,7 +390,22 @@ body {
     font-size: 0.9rem;
 }
 
+/* Adiciona a animação de fade-in para as seções */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
+/* Aplica a animação nas seções de cards */
+.cards-section {
+    animation: fadeIn 0.8s ease-in-out;
+}
 
 
 

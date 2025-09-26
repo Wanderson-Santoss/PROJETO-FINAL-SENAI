@@ -213,8 +213,12 @@ document.addEventListener('DOMContentLoaded', function() {
             for (const key in sections) {
                 if (sections[key]) {
                     if (key === target) {
+                        // Remove a classe de esconder e adiciona a de animação
                         sections[key].classList.remove('d-none');
+                        sections[key].classList.add('cards-section');
                     } else {
+                        // Remove a classe de animação e adiciona a de esconder
+                        sections[key].classList.remove('cards-section');
                         sections[key].classList.add('d-none');
                     }
                 }
