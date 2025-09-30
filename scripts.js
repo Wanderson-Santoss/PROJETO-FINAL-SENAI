@@ -2,39 +2,69 @@
 // Garante que o script só é executado após a página ser completamente carregada
 document.addEventListener('DOMContentLoaded', function() {
     
+    // ====================== Variáveis Globais para Demandas ======================
+    const demandaForm = document.getElementById('demandaForm');
+    const btnAbrirCriar = document.getElementById('btn-abrir-criar-demanda');
+    const collapseForm = document.getElementById('collapseCriarDemanda');
+    const inputOrcamento = document.getElementById('demanda-orcamento');
+    const selectCategoria = document.getElementById('demanda-categoria');
+    const sectionMinhasDemandas = document.getElementById('section-minhas-demandas');
+    const containerBtnCriar = document.getElementById('container-btn-criar');
+    
+    // Mapeamento de categorias para ícones do Bootstrap (bi bi-*)
+    const ICON_MAP = {
+        'eletricidade': 'bi bi-lightning-charge-fill',
+        'hidraulica': 'bi bi-droplet-fill',
+        'pintura': 'bi bi-brush-fill',
+        'jardinagem': 'bi bi-tree-fill',
+        'reformas': 'bi bi-tools',
+        'outros': 'bi bi-question-lg'
+    };
+
+    let demandas = [];
+    let isEditing = false;
+    let currentEditingIndex = -1;
+
+    // Função para resetar o formulário
+    function resetForm() {
+        if (demandaForm) demandaForm.reset();
+        isEditing = false;
+        currentEditingIndex = -1;
+        const formTitle = document.getElementById('form-title');
+        const btnSalvar = document.getElementById('btn-salvar-demanda');
+        if (formTitle) formTitle.textContent = 'Criar Nova Demanda';
+        if (btnSalvar) btnSalvar.textContent = 'Criar Demanda';
+        const iconPreview = document.getElementById('icon-preview');
+        if (iconPreview) iconPreview.className = 'fs-2 text-primary';
+    }
+
     // ====================== CARROSSEL PERSONALIZADO ======================
-    // Seleciona os elementos principais do carrossel
     const track = document.querySelector('.carousel-track');
     const prevButton = document.getElementById('carousel-prev');
     const nextButton = document.getElementById('carousel-next');
 
-    // Verifica se os elementos do carrossel existem na página para evitar erros
     if (track && prevButton && nextButton) {
         let slides = Array.from(document.querySelectorAll('.img-slide'));
-        let currentIndex = 2; // O índice da imagem central que está em destaque
+        let currentIndex = 2;
 
-        // Função para atualizar a posição do carrossel e o destaque da imagem
         function updateCarousel() {
             slides.forEach(slide => {
                 slide.classList.remove('destaque-mid');
             });
-            
-            // Adiciona a classe de destaque à imagem central
             slides[currentIndex].classList.add('destaque-mid');
 
-            // Calcula a posição do carrossel para centralizar a imagem em destaque
             const containerWidth = track.parentElement.offsetWidth;
             const middleImage = slides[currentIndex];
             const middleImageWidth = middleImage.offsetWidth;
             const totalPreviousWidth = slides.slice(0, currentIndex).reduce((acc, img) => acc + img.offsetWidth, 0);
-            const totalPreviousMargin = currentIndex * 20; // 20px de gap
+            const totalPreviousMargin = currentIndex * 20;
 
             const offset = (containerWidth / 2) - (middleImageWidth / 2) - totalPreviousWidth - totalPreviousMargin;
             track.style.transform = `translateX(${offset}px)`;
         }
 
-        // Lógica para o loop infinito do carrossel
         function handleNext() {
+            track.style.transition = 'transform 0.6s ease-in-out';
             currentIndex++;
             updateCarousel();
             if (currentIndex > slides.length - 3) {
@@ -43,13 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     currentIndex = 2;
                     updateCarousel();
                 }, 600);
-                setTimeout(() => {
-                    track.style.transition = 'transform 0.6s ease-in-out';
-                }, 700);
             }
         }
         
         function handlePrev() {
+            track.style.transition = 'transform 0.6s ease-in-out';
             currentIndex--;
             updateCarousel();
             if (currentIndex < 2) {
@@ -58,43 +86,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     currentIndex = slides.length - 3;
                     updateCarousel();
                 }, 600);
-                setTimeout(() => {
-                    track.style.transition = 'transform 0.6s ease-in-out';
-                }, 700);
             }
         }
 
-        // Adiciona os eventos de clique aos botões de navegação
         nextButton.addEventListener('click', handleNext);
         prevButton.addEventListener('click', handlePrev);
 
-        // Inicia o carrossel e o mantém atualizado em redimensionamentos de tela
         updateCarousel();
         window.addEventListener('resize', updateCarousel);
-        setInterval(handleNext, 3000); // Roda automaticamente a cada 3 segundos
+        setInterval(handleNext, 3000); 
     }
     
     // ====================== GALERIA DE PRODUTOS ======================
     const productGallery = document.getElementById('productGallery');
     const galleryPagination = document.getElementById('galleryPagination');
-
-    // Define os caminhos das imagens para a galeria do perfil
     const galleries = [
         ['images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg', 'images/Bolos/bolo1.jpeg'],
         ['images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg', 'images/Bolos/bolo2.jpeg']
     ];
-
     let currentGalleryIndex = 0;
 
-    // Função para renderizar as imagens na galeria
     function renderGallery(index) {
         if (!productGallery) return;
-        productGallery.innerHTML = ''; // Limpa a galeria para recarregar as novas imagens
+        productGallery.innerHTML = '';
         const imagesToLoad = galleries[index];
         if (!imagesToLoad) return;
         imagesToLoad.forEach(imagePath => {
             const colDiv = document.createElement('div');
-            // Classes de coluna do Bootstrap para o layout de 3x2 em telas grandes e 2x3 em telas pequenas
             colDiv.className = 'col-lg-4 col-md-4 col-6 mb-4'; 
             const img = document.createElement('img');
             img.src = imagePath;
@@ -106,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePagination(index);
     }
 
-    // Função para atualizar o estado dos botões da paginação
     function updatePagination(activeIndex) {
         if (!galleryPagination) return;
         const pageItems = galleryPagination.querySelectorAll('.page-item');
@@ -121,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nextArrow) nextArrow.classList.toggle('disabled', activeIndex === galleries.length - 1);
     }
 
-    // Adiciona o evento de clique para a paginação da galeria
     if (galleryPagination) {
         galleryPagination.addEventListener('click', function(event) {
             const target = event.target.closest('.page-item');
@@ -145,16 +161,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-        renderGallery(currentGalleryIndex); // Renderiza a galeria inicial
+        renderGallery(currentGalleryIndex);
     }
 
-    // ====================== TRANSIÇÃO LOGIN/CADASTRO ======================
+    // ====================== TRANSIÇÃO LOGIN/CADASTRO (NOVA LÓGICA) ======================
     const loginForm = document.getElementById('loginForm');
     const cadastroForm = document.getElementById('cadastroForm');
     const showLoginBtn = document.getElementById('showLoginBtn');
     const showCadastroBtn = document.getElementById('showCadastroBtn');
+    const escolhaPerfilContainer = document.getElementById('escolhaPerfilContainer'); // Novo elemento
 
-    // Funções para mostrar e esconder formulários com um efeito de transição
     function showLogin() {
         if (cadastroForm) cadastroForm.style.display = 'none';
         if (loginForm) {
@@ -171,25 +187,67 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Adiciona os eventos de clique para os botões que alternam entre os formulários
     if (showLoginBtn) showLoginBtn.addEventListener('click', showLogin);
     if (showCadastroBtn) showCadastroBtn.addEventListener('click', showCadastro);
 
-    // Adiciona o listener de submit para os formulários
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
+            // **FUTURO**: Adicione aqui a lógica de login com o backend
             const email = document.getElementById('loginEmail').value;
             alert(`Login realizado com sucesso!\nE-mail: ${email}`);
         });
     }
 
+    // LÓGICA PRINCIPAL DE CADASTRO (CONEXÃO COM FLASK)
     if (cadastroForm) {
-        cadastroForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('cadastroEmail').value;
-            const telefone = document.getElementById('cadastroTelefone').value;
-            alert(`Cadastro realizado com sucesso!\nE-mail: ${email}\nTelefone: ${telefone}`);
+        cadastroForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+
+            const url = 'http://127.0.0.1:5000/api/auth/register';
+
+            // Coleta de dados com os NOVOS CAMPOS: Nome e CPF
+            const dadosCadastro = {
+                nome: document.getElementById('cadastroNome').value, 
+                email: document.getElementById('cadastroEmail').value,
+                senha: document.getElementById('cadastroSenha').value,
+                // Remove formatação do CPF antes de enviar
+                cpf: document.getElementById('cadastroCpf').value.replace(/\D/g, ''), 
+                celular: document.getElementById('cadastroTelefone').value,
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosCadastro)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // SUCESSO: O usuário base foi criado
+                    alert(`Usuário ${data.usuario.nome} cadastrado com sucesso!`);
+                    
+                    // Esconde o formulário
+                    cadastroForm.style.display = 'none';
+                    
+                    // Mostra a escolha de perfil
+                    if (escolhaPerfilContainer) {
+                        escolhaPerfilContainer.style.display = 'block';
+                    }
+                    
+                    // Armazena o ID para a próxima etapa (ativação do perfil)
+                    localStorage.setItem('temp_user_id', data.usuario.id); 
+
+                } else {
+                    // ERRO do Backend (Ex: 409 Conflict, 400 Bad Request)
+                    alert(`Erro ao cadastrar: ${data.erro || data.mensagem}`);
+                }
+            } catch (error) {
+                console.error('Erro de conexão:', error);
+                alert('Erro de conexão com o servidor. Verifique se o Flask está rodando na porta 5000.');
+            }
         });
     }
 
@@ -198,26 +256,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = {
         'destaques': document.getElementById('section-destaques'),
         'promocoes': document.getElementById('section-promocoes'),
-        'disponiveis': document.getElementById('section-disponiveis')
+        'disponiveis': document.getElementById('section-disponiveis'),
+        'minhas-demandas': document.getElementById('section-minhas-demandas')
     };
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const target = button.dataset.target;
 
-            // Remove a classe 'active' de todos os botões e adiciona ao clicado
+            // 1. Ativa/Desativa o botão clicado
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            // Oculta todas as seções e mostra apenas a seção alvo
+            // 2. Mostra/Esconde o botão de CRIAR DEMANDA
+            if (containerBtnCriar) {
+                if (target === 'minhas-demandas') {
+                    containerBtnCriar.classList.remove('d-none');
+                } else {
+                    // Esconde o botão e fecha o formulário se estiver aberto
+                    containerBtnCriar.classList.add('d-none');
+                    if (collapseForm && collapseForm.classList.contains('show')) {
+                        btnAbrirCriar.click(); // Simula o clique para fechar o formulário
+                    }
+                }
+            }
+
+            // 3. Mostra/Esconde as seções de cards
             for (const key in sections) {
                 if (sections[key]) {
                     if (key === target) {
-                        // Remove a classe de esconder e adiciona a de animação
                         sections[key].classList.remove('d-none');
                         sections[key].classList.add('cards-section');
                     } else {
-                        // Remove a classe de animação e adiciona a de esconder
                         sections[key].classList.remove('cards-section');
                         sections[key].classList.add('d-none');
                     }
@@ -225,7 +295,237 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+
+    // ====================== LÓGICA DE DEMANDAS ======================
+
+    // 1. Controle de Exibição do Formulário
+    if (btnAbrirCriar && collapseForm) {
+        btnAbrirCriar.addEventListener('click', function() {
+            const isShown = collapseForm.classList.contains('show');
+            if (isShown) {
+                collapseForm.classList.remove('show');
+                this.textContent = 'Criar Nova Demanda';
+                this.classList.remove('btn-danger');
+                this.classList.add('btn-dark');
+                resetForm(); 
+            } else {
+                collapseForm.classList.add('show');
+                this.textContent = 'Fechar Formulário';
+                this.classList.remove('btn-dark');
+                this.classList.add('btn-danger');
+                if (!isEditing) {
+                    resetForm();
+                }
+            }
+        });
+    }
+
+    // 2. Máscara de Moeda (R$)
+    if (inputOrcamento) {
+        inputOrcamento.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); 
+            if (!value) return e.target.value = '';
+            while (value.length < 3) value = '0' + value; 
+            const integerPart = value.substring(0, value.length - 2);
+            const decimalPart = value.substring(value.length - 2);
+            let formattedValue = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            e.target.value = `R$ ${formattedValue},${decimalPart}`;
+        });
+        // Necessário para renderizar o valor formatado ao carregar ou editar
+        inputOrcamento.dispatchEvent(new Event('input')); 
+    }
+
+    // 3. Seleção e Pré-visualização do Ícone
+    if (selectCategoria) {
+        selectCategoria.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            const iconClass = ICON_MAP[selectedCategory] || ICON_MAP['outros'];
+            const iconPreview = document.getElementById('icon-preview');
+            if (iconPreview) {
+                iconPreview.className = `${iconClass} fs-2 text-primary`;
+            }
+        });
+    }
+
+    // 4. Criação e Edição (Manipulação do Form)
+    if (demandaForm) {
+        demandaForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Pega os valores do formulário (AGORA INCLUINDO SUBTÍTULO E LOCALIZAÇÃO)
+            const novaDemanda = {
+                titulo: document.getElementById('demanda-titulo').value,
+                subtitulo: document.getElementById('demanda-subtitulo').value,
+                localizacao: document.getElementById('demanda-localizacao').value,
+                categoria: selectCategoria.value,
+                descricao: document.getElementById('demanda-descricao').value,
+                orcamento: inputOrcamento.value,
+                icone: ICON_MAP[selectCategoria.value] || ICON_MAP['outros'],
+                data: new Date().toLocaleDateString('pt-BR')
+            };
+
+            if (isEditing) {
+                demandas[currentEditingIndex] = novaDemanda;
+            } else {
+                demandas.unshift(novaDemanda);
+            }
+
+            localStorage.setItem('minhasDemandas', JSON.stringify(demandas));
+
+            renderDemandas();
+            btnAbrirCriar.click(); 
+        });
+    }
+
+    // 5. Função de Edição (Disponível globalmente para os botões do card)
+    window.editarDemanda = function(index) {
+        const demanda = demandas[index];
+        if (!demanda) return;
+
+        // 1. Abre o formulário em modo edição
+        if (!collapseForm || !collapseForm.classList.contains('show')) {
+            btnAbrirCriar.click(); 
+        }
+
+        // 2. Preenche o formulário (INCLUINDO SUBTÍTULO E LOCALIZAÇÃO)
+        document.getElementById('demanda-titulo').value = demanda.titulo;
+        document.getElementById('demanda-subtitulo').value = demanda.subtitulo || ''; 
+        document.getElementById('demanda-localizacao').value = demanda.localizacao || ''; 
+        document.getElementById('demanda-descricao').value = demanda.descricao;
+        document.getElementById('demanda-categoria').value = demanda.categoria;
+        document.getElementById('demanda-orcamento').value = demanda.orcamento;
+
+        isEditing = true;
+        currentEditingIndex = index;
+        const formTitle = document.getElementById('form-title');
+        const btnSalvar = document.getElementById('btn-salvar-demanda');
+        if (formTitle) formTitle.textContent = 'Editar Demanda Existente';
+        if (btnSalvar) btnSalvar.textContent = 'Salvar Alterações';
+        
+        // Dispara eventos para atualizar preview de ícone e formatação do orçamento
+        selectCategoria.dispatchEvent(new Event('change'));
+        inputOrcamento.dispatchEvent(new Event('input'));
+    };
+
+    // 6. Função de Excluir (Disponível globalmente para os botões do card)
+    window.excluirDemanda = function(index) {
+        if (confirm("Tem certeza que deseja excluir esta demanda? Esta ação não pode ser desfeita.")) {
+            demandas.splice(index, 1);
+            localStorage.setItem('minhasDemandas', JSON.stringify(demandas));
+            renderDemandas();
+            
+            if (isEditing && currentEditingIndex === index) {
+                resetForm();
+            }
+        }
+    };
+
+
+    // 7. Renderização dos Cards (Minhas Demandas - Estilo Escuro, AGORA CORRIGIDO)
+    function renderDemandas() {
+        if (!sectionMinhasDemandas) return;
+        sectionMinhasDemandas.innerHTML = '';
+
+        if (demandas.length === 0) {
+            sectionMinhasDemandas.innerHTML = `
+                <div class="col-12 text-center p-5">
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i> Você ainda não criou nenhuma demanda. Use o botão 'Criar Nova Demanda' para começar!
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        demandas.forEach((d, index) => {
+            // Garante que campos novos, se não existirem (demandas antigas), sejam string vazia
+            const subtitulo = d.subtitulo || '';
+            const localizacao = d.localizacao || ''; // A variável de localização está aqui
+
+            const cardHTML = `
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-dark bg-dark shadow-lg h-100 p-3" style="border: 1px solid #444; color: white;"> 
+                        <div class="card-body d-flex flex-column">
+                            
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="${d.icone} fs-4 me-3 text-info"></i> 
+                                <div class="text-white">
+                                    <h6 class="text-uppercase fw-bold mb-0">${d.titulo}</h6>
+                                    <p class="mb-0 fw-semibold small text-warning">${subtitulo}</p> 
+                                    <p class="mb-2 fw-semibold small text-muted">${localizacao}</p>
+                                </div>
+                            </div>
+
+                            <p class="small mb-4 description-text flex-grow-1" style="color: #ccc;">
+                                ${d.descricao.substring(0, 150)}${d.descricao.length > 150 ? '...' : ''}
+                                <a href="#" class="text-danger small">ler mais...</a>
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-auto" style="border-color: #555 !important;">
+                                <div class="price-info">
+                                    <span class="fw-bold me-2 small">Orçamento Máximo:</span>
+                                    <span class="text-success fw-bold">${d.orcamento}</span>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-secondary" onclick="editarDemanda(${index})">Editar</button>
+                                    <button class="btn btn-sm btn-danger" onclick="excluirDemanda(${index})">Excluir</button>
+                                </div>
+                            </div>
+                            <p class="text-muted small mt-2 mb-0 text-end">Criado em: ${d.data}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            sectionMinhasDemandas.innerHTML += cardHTML;
+        });
+    }
+
+    // Carrega as demandas do localStorage ao iniciar
+    const savedDemandas = localStorage.getItem('minhasDemandas');
+    if (savedDemandas) {
+        try {
+            demandas = JSON.parse(savedDemandas);
+        } catch (e) {
+            console.error("Erro ao carregar demandas do localStorage", e);
+            demandas = [];
+        }
+    }
+
+    // Renderiza as demandas ao carregar a página
+    renderDemandas();
     
+    // =================================================================
+    // FUNÇÃO DE ESCOLHA DE PERFIL (Chamada pelos botões no HTML)
+    // =================================================================
+    window.escolherPerfil = function(tipo) {
+        const userId = localStorage.getItem('temp_user_id');
+        const escolhaPerfilContainer = document.getElementById('escolhaPerfilContainer');
+
+        if (escolhaPerfilContainer) escolhaPerfilContainer.style.display = 'none';
+
+        if (!userId) {
+            alert("Erro: ID de usuário não encontrado. Faça login ou cadastre-se novamente.");
+            // Exibir a tela de login/cadastro novamente, se possível
+            showLogin(); 
+            return; 
+        }
+
+        if (tipo === 'profissional') {
+            alert("Você escolheu Profissional. O próximo passo é preencher os dados de sua profissão.");
+            // FUTURO: window.location.href = `perfil-profissional.html?user_id=${userId}`;
+            
+        } else if (tipo === 'cliente') {
+            alert("Você escolheu Cliente/Recrutador. O próximo passo é preencher os dados de sua empresa.");
+            // FUTURO: window.location.href = `perfil-cliente.html?user_id=${userId}`;
+
+        } else if (tipo === 'finalizar') {
+            alert("Cadastro de perfil adiado. Redirecionando para o painel principal.");
+            // FUTURO: window.location.href = 'index.html'; 
+        }
+    }
+
+
     // ====================== CHAT ESTATICO ======================
     class ChatBot {
         constructor() {
@@ -287,6 +587,10 @@ document.addEventListener('DOMContentLoaded', function() {
         addUserMessage(message) {
             const chatMessages = document.getElementById('chatMessages');
             if (!chatMessages) return;
+            // Remove o placeholder se for a primeira mensagem
+            if (chatMessages.querySelector('.text-muted.small')) {
+                 chatMessages.innerHTML = '';
+            }
             const div = document.createElement('div');
             div.className = 'mb-4 fade-in';
             div.innerHTML = `<div class="d-flex justify-content-end"><div class="bg-primary text-white rounded px-3 py-2" style="max-width: 80%">${message}</div></div>`;
@@ -296,6 +600,10 @@ document.addEventListener('DOMContentLoaded', function() {
         addBotMessage(message) {
             const chatMessages = document.getElementById('chatMessages');
             if (!chatMessages) return;
+             // Remove o placeholder se for a primeira mensagem
+            if (chatMessages.querySelector('.text-muted.small')) {
+                chatMessages.innerHTML = '';
+            }
             const div = document.createElement('div');
             div.className = 'mb-4 fade-in';
             div.innerHTML = `<div class="d-flex align-items-start mb-2"><div class="w-8 h-8 bg-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-2"><i class="bi bi-robot text-white"></i></div><div class="bg-light border rounded px-3 py-2" style="max-width: 80%">${message}</div></div>`;

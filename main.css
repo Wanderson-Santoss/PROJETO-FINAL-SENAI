@@ -232,7 +232,7 @@ body {
     cursor: default; /* Remove o cursor de pointer, já que já está em destaque */
 }
 
-/* ================= RESPONSIVIDADE ================= */
+/* ================= RESPONSIVIDADE CAROUSEL ================= */
 
 @media (max-width: 991px) {
     .img-slide {
@@ -260,7 +260,7 @@ body {
         transform: scale(1.0);
     }
 }
-/* ================= PERFIS ================= */
+/* ================= PERFIS E CARDS DE SEÇÃO ================= */
 .perfis {
     display: flex;
     justify-content: center;
@@ -278,8 +278,6 @@ body {
     color: #c46034;
 }
 
-
-
 /* Estilo para os botões de filtro */
 .btn-filter {
     background-color: transparent;
@@ -293,10 +291,11 @@ body {
 
 /* Estilo para o botão ativo */
 .btn-filter.active {
-    background-color: #007bff;
+    /* Cor principal do seu tema para ativo */
+    background-color: #c46034; 
     color: #fff;
-    border-color: #007bff;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    border-color: #c46034;
+    box-shadow: 0 4px 8px rgba(196, 96, 52, 0.3); /* Sombra customizada */
 }
 
 .btn-filter:hover:not(.active) {
@@ -304,10 +303,11 @@ body {
     border-color: #adb5bd;
 }
 
+/* =================== ESTILOS DOS CARDS (Geral) =================== */
 
 .card-perfil {
     border: none;
-    background-color: #f8f8e0; /* Fundo para o card de perfil */
+    background-color: #f8f8e0; /* Fundo para o card de perfil (Destaques) */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -358,37 +358,89 @@ body {
     max-height: 4.2em; /* Aproximadamente 1.4em por linha * 3 linhas */
 }
 
-/* Estilo geral para os cards de demanda */
-.card-demanda {
-    background-color: #f0f8ff; /* Um azul claro suave */
+/* =================== ESTILOS DOS CARDS DE DEMANDA (Disponíveis e Minhas Demandas) =================== */
+
+/* Estilo geral para os cards de demanda (APLICADO AGORA TAMBÉM À NOVA CLASSE) */
+.card-demanda, .card-minha-demanda {
+    background-color: #f0f8ff; /* Azul claro suave para demanda */
     border: 1px solid #d0e8f8;
     border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Ajuste para que o .card-perfil aplicado à demanda nos Disponíveis use o estilo de demanda */
+    /* Você pode remover a classe .card-perfil dos cards de demanda no HTML, mas este estilo ajuda se não o fizer. */
 }
 
-.card-demanda:hover {
+.card-demanda:hover, .card-minha-demanda:hover {
     transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.card-demanda .card-footer {
+.card-demanda .card-footer, .card-minha-demanda .card-footer {
     background-color: transparent;
-}
-
-.card-demanda .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
-
-.card-demanda .btn-success:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
+    border-top: none;
+    padding-top: 0.5rem;
 }
 
 /* Ajustes para o texto de orçamento */
 .price-info span {
     font-size: 0.9rem;
 }
+
+/* Estilo do card-perfil para que o card Disponíveis se pareça com Demanda */
+/* Mantendo o estilo original de .card-demanda, mas se você usou .card-perfil no HTML de Disponíveis */
+.card-perfil.card-demanda {
+    background-color: #f0f8ff; 
+    border: 1px solid #d0e8f8;
+}
+
+/* Estilo para o botão PROPOR (Disponíveis) - usando .btn-dark no HTML */
+.card-demanda .btn-dark, .card-perfil .btn-dark {
+    background-color: #343a40; /* Cinza escuro */
+    border-color: #343a40;
+    transition: background-color 0.3s ease;
+}
+
+.card-demanda .btn-dark:hover, .card-perfil .btn-dark:hover {
+    background-color: #1d2124;
+    border-color: #1a1e21;
+}
+
+/* =================== ESTILOS DOS BOTÕES DE AÇÃO (MINHAS DEMANDAS) =================== */
+
+/* Estilo para o botão EDITAR */
+.btn-secondary-custom {
+    background-color: #6c757d; /* Cinza do Bootstrap */
+    border-color: #6c757d;
+    color: white;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: white;
+}
+
+/* Estilo para o botão EXCLUIR (vermelho de perigo) */
+.btn-danger {
+    background-color: #dc3545 !important; /* Vermelho padrão */
+    border-color: #dc3545 !important;
+    color: white !important;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c82333 !important;
+    border-color: #bd2130 !important;
+}
+
 
 /* Adiciona a animação de fade-in para as seções */
 @keyframes fadeIn {
@@ -408,22 +460,7 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* TELA DE PERFIL */
+/* ================= TELA DE PERFIL ================= */
 .perfil-container {
     max-width: 1000px;
     margin: 40px auto;

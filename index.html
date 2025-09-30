@@ -192,10 +192,66 @@
 <section class="container my-5">
     <div class="d-flex justify-content-center my-4 button-group">
         <button class="btn btn-filter active" data-target="destaques">Destaques</button>
-        <button class="btn btn-filter" data-target="promocoes">Promoções</button>
+        <button class="btn btn-filter" data-target="minhas-demandas">Minhas Demandas</button> 
         <button class="btn btn-filter" data-target="disponiveis">Disponíveis</button>
     </div>
 
+    <div id="container-btn-criar" class="mb-4 d-none"> 
+        <button id="btn-abrir-criar-demanda" class="btn btn-dark btn-lg shadow-sm">
+            Criar Nova Demanda
+        </button>
+    </div>
+
+    <div class="collapse mt-3" id="collapseCriarDemanda">
+        <div class="card card-body shadow-lg border-0 rounded-3 p-4 mb-4">
+            <h4 id="form-title" class="mb-4 text-primary">Criar Nova Demanda</h4>
+            <form id="demandaForm">
+    <div class="row g-3 mb-3">
+        <div class="col-md-5">
+            <label for="demanda-titulo" class="form-label">Título do Serviço</label>
+            <input type="text" class="form-control form-control-lg" id="demanda-titulo" placeholder="Ex: Conserto de curto-circuito no quarto" required>
+        </div>
+        <div class="col-md-4">
+            <label for="demanda-subtitulo" class="form-label">Subtítulo/Slogan (Ex: Urgente!)</label>
+            <input type="text" class="form-control form-control-lg" id="demanda-subtitulo" placeholder="Ex: Preciso de ajuda urgente!" required>
+        </div>
+        <div class="col-md-3">
+            <label for="demanda-categoria" class="form-label">Categoria</label>
+            <select class="form-select form-select-lg" id="demanda-categoria" required>
+                <option value="" disabled selected>Selecione a Categoria</option>
+                <option value="eletricidade">Eletricidade</option>
+                <option value="hidraulica">Hidráulica</option>
+                <option value="pintura">Pintura</option>
+                <option value="jardinagem">Jardinagem</option>
+                <option value="reformas">Reformas</option>
+                <option value="outros">Outros</option>
+            </select>
+            <div class="mt-3 text-center">
+                <i id="icon-preview" class="fs-2 text-primary"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-7">
+            <label for="demanda-descricao" class="form-label">Descrição Detalhada do Serviço</label>
+            <textarea class="form-control" id="demanda-descricao" rows="3" required placeholder="Detalhe o que precisa ser feito para receber orçamentos mais precisos."></textarea>
+        </div>
+        <div class="col-md-3">
+            <label for="demanda-orcamento" class="form-label">Orçamento Máximo (R$)</label>
+            <input type="text" class="form-control form-control-lg" id="demanda-orcamento" required placeholder="R$ 0,00">
+        </div>
+        <div class="col-md-2">
+            <label for="demanda-localizacao" class="form-label">Localização</label>
+            <input type="text" class="form-control form-control-lg" id="demanda-localizacao" required placeholder="Ex: Rio de Janeiro, RJ">
+        </div>
+    </div>
+
+    <button type="submit" id="btn-salvar-demanda" class="btn btn-primary btn-lg w-100">Criar Demanda</button>
+</form>
+        </div>
+    </div>
+    
     <div id="section-destaques" class="container card-section">
         <div class="row g-4">
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
@@ -247,7 +303,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
                     <div class="d-flex align-items-center mb-3">
@@ -300,10 +356,8 @@
         </div>
     </div>
 
-    <div id="section-promocoes" class="container card-section d-none">
-        <div class="row g-4">
-            </div>
-    </div>
+    <div id="section-minhas-demandas" class="row mt-4 cards-section d-none">
+        </div>
     
     <div id="section-disponiveis" class="container card-section d-none">
         <div class="row g-4">
@@ -348,7 +402,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
                     <div class="d-flex align-items-center mb-3">
