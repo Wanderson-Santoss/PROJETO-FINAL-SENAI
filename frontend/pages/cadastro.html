@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro VAGALI</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Estilo customizado -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg sticky-top p-4">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./images/Logo/LOGOBRANCO.png" alt="Vagali Logo" class="navbar-logo me-2"> 
+                Vag<span class="span-logo">Ali</span>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu-navegacao">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="navbar-collapse collapse justify-content-end" id="menu-navegacao">
+                <ul class="nav nav-pills d-block d-md-flex">
+                    <li class="nav-item fw-bold">
+                        <a href="./index.html" class="nav-link active">
+                            <i class="me-2 bi bi-suitcase-lg"></i> Sobre o Vagali
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown fw-bold">
+                        <a href="#" class="nav-link dropdown-toggle" id="categoriasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="me-2 bi bi-list"></i> Categorias
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-briefcase"></i> Administração</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-brush"></i> Design</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-code-slash"></i> Tecnologia</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart-pulse"></i> Saúde</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-currency-dollar"></i> Finanças</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-translate"></i> Idiomas</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> Recursos Humanos</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-building"></i> Engenharia</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item fw-bold" href="#"><i class="bi bi-grid"></i> Ver Todas as Categorias</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown fw-bold">
+                        <a href="#" class="nav-link dropdown-toggle" id="linguagemDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="me-2 bi bi-globe"></i> Linguagem
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="linguagemDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> Português (BR)</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> Inglês</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> Espanhol</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item fw-bold">
+                        <a href="#rodape" class="nav-link"><i class="me-2 bi bi-chat-left-text"></i> Fale Conosco</a>
+                    </li>
+                    <li class="nav-item fw-bold">
+                        <a href="./cadastro.html" class="nav-link" target="_blank">
+                            <i class="me-2 bi bi-person-fill"></i> Cadastro
+                        </a>
+                    </li>
+                    <li class="nav-item fw-bold">
+                        <a href="./cadastro.html" class="nav-link" target="_blank">
+                            <i class="me-2 bi bi-person-fill"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login & Cadastro -->
+    <section class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="login-cadastro-container">
+
+            <!-- Login -->
+            <div id="loginForm">
+                <h1 class="text-center mb-4">Login VagAli</h1>
+                <form>
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">E-mail:</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="vagali@gmail.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginSenha" class="form-label">Senha:</label>
+                        <input type="password" class="form-control" id="loginSenha" placeholder="********" required>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <button type="submit" class="btn btn-success">Entrar</button>
+                        <button type="button" class="btn btn-danger" onclick="clearLoginForm()">Cancelar</button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <p class="text-muted">Ainda não tem conta?
+                        <button type="button" class="btn btn-link toggle-link" id="showCadastroBtn">Cadastre-se aqui</button>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cadastro -->
+            <div id="cadastroForm" style="display: none;">
+                <h1 class="text-center mb-4">Cadastro VagAli</h1>
+                <form>
+                    <div class="mb-3">
+                        <label for="cadastroNome" class="form-label">Nome Completo:</label>
+                        <input type="text" class="form-control" id="cadastroNome" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cadastroEmail" class="form-label">E-mail:</label>
+                        <input type="email" class="form-control" id="cadastroEmail" placeholder="vagali@gmail.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cadastroSenha" class="form-label">Senha:</label>
+                        <input type="password" class="form-control" id="cadastroSenha" placeholder="********" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cadastroCpf" class="form-label">CPF (Apenas números):</label>
+                        <input type="text" class="form-control" id="cadastroCpf" placeholder="00000000000" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cadastroTelefone" class="form-label">Telefone:</label>
+                        <input type="tel" class="form-control" id="cadastroTelefone" placeholder="(00) 12345-0989">
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-danger" onclick="clearCadastroForm()">Cancelar</button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <p class="text-muted">Já tem uma conta?
+                        <button type="button" class="btn btn-link toggle-link" id="showLoginBtn">Faça login aqui</button>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Escolha Perfil -->
+            <div id="escolhaPerfilContainer" class="card p-4 shadow-sm text-center" style="display: none;">
+                <h2>Quase lá! Qual seu objetivo no VagAli?</h2>
+                <p class="lead text-muted">Defina seu perfil para começar a usar a plataforma.</p>
+                <div class="d-grid gap-3 mx-auto mt-4" style="max-width: 350px;">
+                    <button id="btnClienteRecrutador" class="btn btn-primary btn-lg" onclick="window.escolherPerfil('cliente')">
+                        <i class="bi bi-building me-2"></i> Sou Cliente (Quero Contratar)
+                    </button>
+                    <button id="btnProfissional" class="btn btn-success btn-lg" onclick="window.escolherPerfil('profissional')">
+                        <i class="bi bi-briefcase me-2"></i> Sou Profissional (Quero Trabalhar)
+                    </button>
+                    <button class="btn btn-link mt-2" onclick="window.escolherPerfil('finalizar')">
+                        Deixar para depois. Ir para o Painel.
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Flutuante -->
+    <div id="supportButton" class="position-fixed bottom-0 end-0 m-4">
+        <button class="btn btn-lg rounded-circle shadow-lg btn-primary" data-bs-toggle="collapse" data-bs-target="#chatWidget" aria-expanded="false" aria-controls="chatWidget">
+            <i class="bi bi-chat-dots fs-3"></i>
+        </button>
+    </div>
+    <div id="chatWidget" class="collapse position-fixed bottom-0 end-0 m-4" style="width: 22rem; max-height: 28rem; z-index:1050;">
+        <div class="card shadow-lg border-0 h-100 d-flex flex-column">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                        <i class="bi bi-robot fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Assistente Virtual</h6>
+                        <small>Online agora</small>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-light" data-bs-toggle="collapse" data-bs-target="#chatWidget">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div id="chatMessages" class="card-body overflow-auto bg-light flex-grow-1">
+                <div class="text-muted small">Inicie uma conversa...</div>
+            </div>
+            <div class="card-footer">
+                <div class="input-group">
+                    <input id="messageInput" type="text" class="form-control" placeholder="Digite sua mensagem...">
+                    <button id="sendMessage" class="btn btn-primary">
+                        <i class="bi bi-send"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle + Script customizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./scripts.js"></script>
+</body>
+</html>
