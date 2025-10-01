@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENU VAGALI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="navbar navbar-expand-lg sticky-top p-4">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/Logo/LOGOBRANCO.png') }}" alt="Vagali Logo" class="navbar-logo me-2"> Vag<span class="span-logo">Ali</span>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu-navegacao">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="navbar-collapse collapse justify-content-end" id="menu-navegacao">
+                <ul class="nav nav-pills d-block d-md-flex">
+                    <li class="nav-item fw-bold">
+                        <a href="#" class="nav-link active"> <i class="me-2 bi bi-suitcase-lg"></i> Sobre o Vagali</a>
+                    </li>
+                    <li class="nav-item dropdown fw-bold">
+                        <a href="#" class="nav-link dropdown-toggle" id="categoriasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="me-2 bi bi-list"></i> Categorias
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-briefcase"></i> Administração</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-brush"></i> Design</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-code-slash"></i> Tecnologia</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart-pulse"></i> Saúde</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-currency-dollar"></i> Finanças</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-translate"></i> Idiomas</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> Recursos Humanos</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-building"></i> Engenharia</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item fw-bold" href="#"><i class="bi bi-grid"></i> Ver Todas as Categorias</a></li>
+                        </ul>
+                    </li>
+    
+                    <!-- Linguagem Dropdown -->
+                    <li class="nav-item dropdown fw-bold">
+                        <a href="#" class="nav-link dropdown-toggle" id="linguagemDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="me-2 bi bi-globe"></i> Linguagem
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="linguagemDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> Português (BR)</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> Inglês</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-flag"></i> Espanhol</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                        </ul>
+                    </li>
+    
+                    <li class="nav-item fw-bold">
+                        <a href="#rodape" class="nav-link"><i class="me-2 bi bi-chat-left-text"></i> Fale Conosco</a>
+                    </li>
+                    <li class="nav-item fw-bold">
+                        <a href="{{ url_for('cadastro') }}" class="nav-link" target="_blank"> <i class="me-2 bi bi-person-fill"></i> Cadastro</a>
+                    </li>
+                    <!-- <li class="nav-item fw-bold">
+                        <a href="./cadastro.html" class="nav-link" target="_blank"> <i class="me-2 bi bi-person-fill"></i> Login</a>
+                    </li> -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!--Barra de pesquisas -->
+    <section class="search-bar-section py-4">
+            <div class="container">
+                <form class="d-flex justify-content-center" role="search">
+                    <div class="input-group" style="max-width: 600px;">
+                        <input type="search" class="form-control rounded-pill pe-5" placeholder="Pesquisar categoria ou serviço..." aria-label="Pesquisar" id="search-input">
+                        <button class="btn btn-primary rounded-pill ms-n5" type="submit" style="z-index: 2;">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+    <!--Botões que vão levar a categorias, só por mais dps -->
+   <div class="categorias" id="catego">
+    <button class="categoria-btn">
+        <i class="bi bi-hammer"></i>
+        <span>Ferramentas</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-bricks"></i>
+        <span>Construção</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-scissors"></i>
+        <span>Beleza</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-lightning-fill"></i>
+        <span>Eletricista</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-heart-pulse"></i>
+        <span>Saúde</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-currency-dollar"></i>
+        <span>Finanças</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-cup-hot"></i>
+        <span>Alimentos</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-book"></i>
+        <span>Educação</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-laptop"></i>
+        <span>Tecnologia</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-gear"></i>
+        <span>Serviços</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-tree"></i>
+        <span>Jardinagem</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-star-fill"></i>
+        <span>Destaques</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-tag-fill"></i>
+        <span>Promoções</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Certificados</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-truck"></i>
+        <span>Entregas</span>
+    </button>
+    <button class="categoria-btn">
+        <i class="bi bi-trash"></i>
+        <span>Limpeza</span>
+    </button>
+</div>
+
+
+
+    <!--Começo do Carousel/slides -->
+<section id="sobre-vagali">
+    <div id="carousel-custom" class="carousel">
+        <button id="carousel-prev" class="carousel-control-prev" type="button">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button id="carousel-next" class="carousel-control-next" type="button">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+        <div class="carousel-track">
+            <img src="{{ url_for('static', filename='images/Slide/domestica.jpg') }}" alt="Domestica" class="img-slide" />
+            <img src="{{ url_for('static', filename='images/Slide/cabelereira.jpg') }}" alt="Cabelereira" class="img-slide" />
+
+            <img src="{{ url_for('static', filename='images/Slide/Pedreiro.jpg') }}" alt="Pedreiro" class="img-slide" data-index="0" />
+            <img src="{{ url_for('static', filename='images/Slide/professor.jpg') }}" alt="Professora" class="img-slide" data-index="1" />
+            <img src="{{ url_for('static', filename='images/Slide/domestica.jpg') }}" alt="Domestica" class="img-slide" data-index="2" />
+            <img src="{{ url_for('static', filename='images/Slide/cabelereira.jpg') }}" alt="Cabelereira" class="img-slide" data-index="3" />
+            <img src="{{ url_for('static', filename='images/Slide/eletricista.jpg') }}" alt="Eletricista" class="img-slide destaque-mid" data-index="4" />
+            <img src="{{ url_for('static', filename='images/Slide/carpinteiro.jpg') }}" alt="Carpinteiro" class="img-slide" data-index="5" />
+            <img src="{{ url_for('static', filename='images/Slide/manicure.jpg') }}" alt="Manicure" class="img-slide" data-index="6" />
+            <img src="{{ url_for('static', filename='images/Slide/mecanico.jpg') }}" alt="Mecanico" class="img-slide" data-index="7" />
+            
+            <img src="{{ url_for('static', filename='images/Slide/Pedreiro.jpg') }}" alt="Pedreiro" class="img-slide" />
+            <img src="{{ url_for('static', filename='images/Slide/professor.jpg') }}" alt="Professora" class="img-slide" />
+        </div>
+    </div>
+</section>
+   
+
+
+   
+<section class="container my-5">
+    <div class="d-flex justify-content-center my-4 button-group">
+        <button class="btn btn-filter active" data-target="destaques">Destaques</button>
+        <button class="btn btn-filter" data-target="minhas-demandas">Minhas Demandas</button> 
+        <button class="btn btn-filter" data-target="disponiveis">Disponíveis</button>
+    </div>
+
+    <div id="container-btn-criar" class="mb-4 d-none text-end"> 
+        <button id="btn-abrir-criar-demanda" class="btn btn-dark btn-lg shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCriarDemanda" aria-expanded="false" aria-controls="collapseCriarDemanda">
+            Criar Nova Demanda
+        </button>
+    </div>
+
+    <div class="collapse mt-3" id="collapseCriarDemanda">
+        <div class="card card-body shadow-lg border-0 rounded-3 p-4 mb-4">
+            <h4 id="form-title" class="mb-4 text-primary">Criar Nova Demanda</h4>
+            <form id="demandaForm">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-5">
+                        <label for="demanda-titulo" class="form-label">Título do Serviço</label>
+                        <input type="text" class="form-control form-control-lg" id="demanda-titulo" placeholder="Ex: Conserto de curto-circuito no quarto" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="demanda-subtitulo" class="form-label">Subtítulo/Slogan (Ex: Urgente!)</label>
+                        <input type="text" class="form-control form-control-lg" id="demanda-subtitulo" placeholder="Ex: Preciso de ajuda urgente!" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="demanda-categoria" class="form-label">Categoria</label>
+                        <select class="form-select form-select-lg" id="demanda-categoria" required>
+                            <option value="" disabled selected>Selecione a Categoria</option>
+                            <option value="eletricidade">Eletricidade</option>
+                            <option value="hidraulica">Hidráulica</option>
+                            <option value="pintura">Pintura</option>
+                            <option value="jardinagem">Jardinagem</option>
+                            <option value="reformas">Reformas</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                        <div class="mt-3 text-center">
+                            <i id="icon-preview" class="fs-2 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-7">
+                        <label for="demanda-descricao" class="form-label">Descrição Detalhada do Serviço</label>
+                        <textarea class="form-control" id="demanda-descricao" rows="3" required placeholder="Detalhe o que precisa ser feito para receber orçamentos mais precisos."></textarea>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="demanda-orcamento" class="form-label">Orçamento Máximo (R$)</label>
+                        <input type="text" class="form-control form-control-lg" id="demanda-orcamento" required placeholder="R$ 0,00">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="demanda-localizacao" class="form-label">Localização</label>
+                        <input type="text" class="form-control form-control-lg" id="demanda-localizacao" required placeholder="Ex: Rio de Janeiro, RJ">
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-salvar-demanda" class="btn btn-primary btn-lg w-100">Criar Demanda</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="destaques" class="row g-4 cards-section">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ url_for('static', filename='images/Perfil/confeiteira.jpg') }}" alt="Juliana Doces" class="rounded-circle perfil-img me-3">                        <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Confeiteira</h6>
+                        <p class="mb-0 fw-semibold">Juliana Doces</p>
+                        <p class="text-muted small mb-1">Rio de Janeiro, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Especialista em doces para casamentos, bolos, tortas e outros <a href="./perfil.html" target="_blank">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="stars d-flex align-items-center gap-1">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="fw-bold ms-1">5/5</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">+ Seguir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ url_for('static', filename='images/Perfil/eletricista.jpg') }}" alt="Carlos Mendes" class="rounded-circle perfil-img me-3">
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Eletricista</h6>
+                        <p class="mb-0 fw-semibold">Carlos Mendes</p>
+                        <p class="text-muted small mb-1">São Paulo, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Instalações e manutenções prediais com certificação <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="stars d-flex align-items-center gap-1">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="fw-bold ms-1">4/5</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">+ Seguir</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ url_for('static', filename='images/Perfil/cabelereira.jpg') }}" alt="Ana Costa" class="rounded-circle perfil-img me-3">
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Cabeleireira</h6>
+                        <p class="mb-0 fw-semibold">Ana Costa</p>
+                        <p class="text-muted small mb-1">Belo Horizonte, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Especializada em cortes modernos e coloração <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="stars d-flex align-items-center gap-1">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="fw-bold ms-1">3.5/5</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">+ Seguir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ url_for('static', filename='images/Perfil/carpinteiro.jpg') }}" alt="Roberto Dias" class="rounded-circle perfil-img me-3">
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Carpinteiro</h6>
+                        <p class="mb-0 fw-semibold">Roberto Dias</p>
+                        <p class="text-muted small mb-1">Curitiba, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Móveis sob medida e reparos em madeira <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="stars d-flex align-items-center gap-1">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="fw-bold ms-1">3.5/5</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">+ Seguir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="minhas-demandas" class="row mt-4 d-none">
+    </div>
+    
+    <div id="disponiveis" class="row g-4 d-none">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-tools fs-4 me-3 text-primary"></i>
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Serviço de Eletricista</h6>
+                        <p class="mb-0 fw-semibold">Preciso de ajuda urgente!</p>
+                        <p class="text-muted small mb-1">Rio de Janeiro, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Instalação de novas tomadas em sala comercial. Preciso de um profissional disponível. <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="price-info">
+                        <span class="fw-bold me-2">Orçamento:</span>
+                        <span>R$ 200,00</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">Propor</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-house-door fs-4 me-3 text-success"></i>
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Limpeza de Casa</h6>
+                        <p class="mb-0 fw-semibold">Procuro profissional para dia 28/09</p>
+                        <p class="text-muted small mb-1">São Paulo, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Limpeza completa de apartamento de 2 quartos no centro da cidade. <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="price-info">
+                        <span class="fw-bold me-2">Orçamento:</span>
+                        <span>R$ 250,00</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">Propor</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-paint-bucket fs-4 me-3 text-danger"></i>
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Serviço de Pintor</h6>
+                        <p class="mb-0 fw-semibold">Pintura de sala e cozinha</p>
+                        <p class="text-muted small mb-1">Belo Horizonte, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Preciso de um profissional para pintar dois cômodos. <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="price-info">
+                        <span class="fw-bold me-2">Orçamento:</span>
+                        <span>Valor a Negociar</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">Propor</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card card-perfil shadow-sm p-3 flex-fill h-100">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-screwdriver fs-4 me-3 text-info"></i>
+                    <div>
+                        <h6 class="text-uppercase fw-bold mb-0">Montagem de Móveis</h6>
+                        <p class="mb-0 fw-semibold">Ajuda com um armário</p>
+                        <p class="text-muted small mb-1">Curitiba, Brasil</p>
+                    </div>
+                </div>
+                <p class="small mb-2 description-text">Preciso de um profissional para montar um guarda-roupa. <a href="#">ler mais...</a></p>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="price-info">
+                        <span class="fw-bold me-2">Orçamento:</span>
+                        <span>R$ 150,00</span>
+                    </div>
+                    <button class="btn btn-dark btn-sm">Propor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer class="footer mt-5 py-4" id="rodape">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h5 class="text-white mb-3">VAGALI</h5>
+                <p class="text-white-50 small">Conectando você aos melhores serviços autônomos locais.</p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h5 class="text-white mb-3">Links Úteis</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white-50 text-decoration-none small">Sobre o Vagali</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none small">Categorias</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none small">Cadastro</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none small">Fale Conosco</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="text-white mb-3">Redes Sociais</h5>
+                <div class="social-links d-flex justify-content-center gap-3">
+                    <a href="#" class="social-icon"><i class="bi bi-facebook fs-4"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-instagram fs-4"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-linkedin fs-4"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-twitter fs-4"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="footer-divider my-4">
+        <p class="text-white-50 small mb-0">&copy; 2025 VAGALI. Todos os direitos reservados. Local: São Gonçalo, RJ.</p>
+    </div>
+</footer>
+
+
+<!-- Botão Flutuante -->
+<div id="supportButton" 
+     class="position-fixed bottom-0 end-0 m-4">
+    <button class="btn btn-lg rounded-circle shadow-lg btn-primary bounce-gentle" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#chatWidget" 
+        aria-expanded="false" 
+        aria-controls="chatWidget">
+    <i class="bi bi-chat-dots fs-3"></i>
+    </button>
+
+</div>
+
+<!-- Janela do Chat -->
+<div id="chatWidget" 
+     class="collapse position-fixed bottom-0 end-0 m-4" 
+     style="width: 22rem; max-height: 28rem; z-index:1050;">
+    <div class="card shadow-lg border-0 h-100 d-flex flex-column">
+        
+        <!-- Cabeçalho -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                    <i class="bi bi-robot fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0">Assistente Virtual</h6>
+                    <small>Online agora</small>
+                </div>
+            </div>
+            <button class="btn btn-sm btn-light" data-bs-toggle="collapse" data-bs-target="#chatWidget">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <!-- Corpo (Mensagens) -->
+        <div id="chatMessages" class="card-body overflow-auto bg-light flex-grow-1">
+            <div class="text-muted small">Inicie uma conversa...</div>
+        </div>
+
+        <!-- Rodapé (Input) -->
+        <div class="card-footer">
+            <div class="input-group">
+                <input id="messageInput" type="text" class="form-control" placeholder="Digite sua mensagem...">
+                <button id="sendMessage" class="btn btn-primary">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="{{ url_for('static', filename='js/utils-api-form.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/display-components.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/card-filters.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/demanda-crud.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/chat-bot.js') }}"></script> 
+</body>
+</html>
