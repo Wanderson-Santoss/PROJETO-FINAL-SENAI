@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elementos e variáveis definidas globalmente em utils-api-form.js
     const { 
         demandaForm, sectionMinhasDemandas, btnAbrirCriar, 
-        selectCategoria, inputOrcamento, ICON_MAP 
+        selectCategoria, inputOrcamento, ICON_MAP, 
+        collapseForm, filterButtons 
     } = window;
 
     // 7. Renderização dos Cards (Minhas Demandas)
@@ -20,13 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `;
-            // IMPORTANTE: Garante que a seção mantém o layout de linha (d-flex) 
-            // mesmo que só haja a mensagem de vazio, como configuramos em card-filters.js
-            sectionMinhasDemandas.classList.add('d-flex'); 
-            return;
+            return; 
         }
 
-        // Se houver cards, o d-flex já está lá pela função updateSectionVisibility
         const fragment = document.createDocumentFragment();
 
         window.demandas.forEach((d, index) => {
@@ -34,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const localizacao = d.localizacao || ''; 
 
             const cardHTML = document.createElement('div');
-            // IMPORTANTE: Use a classe de coluna para respeitar o layout 'row g-4' da seção!
             cardHTML.className = 'col-lg-4 col-md-6 mb-4'; 
             cardHTML.innerHTML = `
                 <div class="card card-dark bg-dark shadow-lg h-100 p-3" style="border: 1px solid #444; color: white;"> 
@@ -76,15 +72,20 @@ document.addEventListener('DOMContentLoaded', function() {
         demandaForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // FORÇA A ATIVAÇÃO DO FILTRO 'MINHAS DEMANDAS' e VISIBILIDADE
-            const btnMinhasDemandas = window.filterButtons.find(b => b.dataset.target === 'minhas-demandas');
-            if (btnMinhasDemandas && window.updateSectionVisibility) {
-                // Simula o clique para garantir que a seção correta esteja visível
+            // NOVO CÓDIGO: 
+            // 1. Garante que a seção "Minhas Demandas" fique visível
+            if (window.updateSectionVisibility) {
                 window.updateSectionVisibility('minhas-demandas');
-                window.filterButtons.forEach(btn => btn.classList.remove('active'));
-                btnMinhasDemandas.classList.add('active');
             }
 
+            // 2. Garante que o botão de filtro "Minhas Demandas" fique ativo (visual)
+            const btnMinhasDemandas = filterButtons.find(b => b.dataset.target === 'minhas-demandas');
+            if (btnMinhasDemandas) {
+                filterButtons.forEach(btn => btn.classList.remove('active')); // Desativa todos
+                btnMinhasDemandas.classList.add('active'); // Ativa o correto
+            }
+
+            // 3. Criação do Objeto e Lógica de Salvar/Editar
             const novaDemanda = {
                 titulo: document.getElementById('demanda-titulo').value,
                 subtitulo: document.getElementById('demanda-subtitulo').value,
@@ -99,31 +100,44 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.isEditing) {
                 window.demandas[window.currentEditingIndex] = novaDemanda;
             } else {
+                // Adiciona o novo card no início da lista (mais recente)
                 window.demandas.unshift(novaDemanda);
             }
 
             localStorage.setItem('minhasDemandas', JSON.stringify(window.demandas));
             
-            // AQUI ESTÁ A CHAVE: RE-RENDERIZA TUDO para mostrar o novo card
+            // 4. Re-renderiza tudo para mostrar o novo card
             renderDemandas();
             
-            // Fecha o formulário
-            btnAbrirCriar.click(); 
+            // 5. Fecha o formulário
+            if (collapseForm && collapseForm.classList.contains('show')) {
+                btnAbrirCriar.click(); 
+            }
         });
     }
 
     // 5. Função de Edição
     window.editarDemanda = function(index) {
-        if (!btnAbrirCriar || !window.collapseForm || !selectCategoria || !inputOrcamento) return;
+        if (!btnAbrirCriar || !collapseForm || !selectCategoria || !inputOrcamento) return;
         const demanda = window.demandas[index];
         if (!demanda) return;
         
-        // Simula o clique para abrir o formulário
-        if (!window.collapseForm.classList.contains('show')) {
+        // 1. Garante que a aba 'Minhas Demandas' esteja ativa ao editar
+        if (window.updateSectionVisibility) {
+            window.updateSectionVisibility('minhas-demandas');
+        }
+        const btnMinhasDemandas = filterButtons.find(b => b.dataset.target === 'minhas-demandas');
+        if (btnMinhasDemandas) {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            btnMinhasDemandas.classList.add('active');
+        }
+
+        // 2. Abre o formulário
+        if (!collapseForm.classList.contains('show')) {
             btnAbrirCriar.click(); 
         }
         
-        // Preenche o formulário
+        // 3. Preenche o formulário
         document.getElementById('demanda-titulo').value = demanda.titulo;
         document.getElementById('demanda-subtitulo').value = demanda.subtitulo || ''; 
         document.getElementById('demanda-localizacao').value = demanda.localizacao || ''; 
@@ -138,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (formTitle) formTitle.textContent = 'Editar Demanda Existente';
         if (btnSalvar) btnSalvar.textContent = 'Salvar Alterações';
         
-        // Dispara eventos para atualizar pré-visualizações
+        // 4. Dispara eventos para atualizar pré-visualizações
         selectCategoria.dispatchEvent(new Event('change'));
         inputOrcamento.dispatchEvent(new Event('input'));
     };
@@ -149,8 +163,13 @@ document.addEventListener('DOMContentLoaded', function() {
             window.demandas.splice(index, 1);
             localStorage.setItem('minhasDemandas', JSON.stringify(window.demandas));
             renderDemandas();
+            
+            // Se o formulário estiver aberto (em edição da demanda excluída), ele deve ser resetado.
             if (window.isEditing && window.currentEditingIndex === index) {
                 window.resetForm();
+                if (collapseForm.classList.contains('show')) {
+                    btnAbrirCriar.click(); 
+                }
             }
         }
     };
@@ -160,5 +179,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedDemandas) {
         try { window.demandas = JSON.parse(savedDemandas); } catch (e) { console.error("Erro ao carregar demandas do localStorage", e); window.demandas = []; }
     }
-    renderDemandas(); // Renderiza ao carregar a página
 });

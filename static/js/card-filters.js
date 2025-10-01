@@ -1,10 +1,10 @@
 /* ====================== 2. LÓGICA DE FILTRO DE CARDS ====================== */
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Variáveis definidas em utils-api-form.js
+    // Variáveis definidas em utils-api-form.js (Verificadas e Corretas)
     const { 
         filterButtons, sectionDestaques, sectionMinhasDemandas, 
-        sectionDisponiveis, containerBtnCriar, btnAbrirCriar 
+        sectionDisponiveis, containerBtnCriar, btnAbrirCriar, collapseForm
     } = window;
 
     // Se as variáveis globais não existirem, o código para aqui (erro de ordem)
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Função central para alternar a visibilidade das seções
-    // Esta função é chamada tanto pelo clique quanto pelo demanda-crud.js após salvar um novo card.
     window.updateSectionVisibility = function(targetId) {
         
         const allSections = [
@@ -23,36 +22,37 @@ document.addEventListener('DOMContentLoaded', function() {
             { element: sectionDisponiveis, id: 'disponiveis' }
         ];
 
-        let targetSectionFound = false;
-
         allSections.forEach(section => {
             if (section.id === targetId) {
-                // 1. Mostrar a seção correta e o botão de criar
+                // APENAS REMOVE d-none para mostrar (O row já faz o layout)
                 section.element.classList.remove('d-none');
-                section.element.classList.add('d-flex'); // Usa d-flex para layout em row
-                targetSectionFound = true;
             } else {
-                // 2. Esconder as outras
+                // ADICIONA d-none para esconder
                 section.element.classList.add('d-none');
-                section.element.classList.remove('d-flex'); 
             }
         });
         
-        // 3. Gerenciar o botão "Criar Nova Demanda"
+        // Gerenciar o botão "Criar Nova Demanda" e fechar o form se for necessário
         if (targetId === 'minhas-demandas' && containerBtnCriar) {
             containerBtnCriar.classList.remove('d-none');
+            
+            // Re-renderiza a lista de demandas
+            if (window.renderDemandas) {
+                window.renderDemandas();
+            }
+            
         } else if (containerBtnCriar) {
             containerBtnCriar.classList.add('d-none');
             
-            // 4. Se mudar de aba com o formulário aberto, fecha ele
-            if (window.collapseForm && window.collapseForm.classList.contains('show')) {
-                // Isso simula o clique, o que dispara o evento hidden.bs.collapse e reseta o form (em utils-api-form.js)
+            // Se o formulário de criação/edição estiver aberto, ele deve ser fechado
+            if (collapseForm && collapseForm.classList.contains('show')) {
+                // Simula o clique para fechar o collapse e disparar o resetForm
                 if (btnAbrirCriar) btnAbrirCriar.click(); 
             }
         }
     }
 
-    // 5. Adicionar Event Listeners aos botões de filtro
+    // Adicionar Event Listeners aos botões de filtro
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
             const targetId = this.dataset.target;
@@ -65,14 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Troca a seção
             window.updateSectionVisibility(targetId);
-
-            // Se for 'Minhas Demandas', re-renderiza os cards
-            if (targetId === 'minhas-demandas' && window.renderDemandas) {
-                window.renderDemandas();
-            }
         });
     });
 
-    // 6. Inicialização: Garante que a seção "Destaques" esteja visível ao carregar
+    // Inicialização: Garante que a seção "Destaques" esteja visível ao carregar
     window.updateSectionVisibility('destaques');
 });
