@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="W:\AJUSTE\PROJETO-FINAL-SENAI\venv"
+VIRTUAL_ENV="W:\FRONT-PRONTO\PROJETO-FINAL-SENAI\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

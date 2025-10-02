@@ -1,10 +1,11 @@
 from flask import Blueprint, request, jsonify
-# 🚨 Esta linha pressupõe que a classe 'Usuario' está em models.py
-from domain.models import Usuario 
-import random 
+# Importa o objeto 'db'
+from database import db
+# Importa a classe Usuario (o modelo)
+from backend.models.usuario_model import Usuario 
+# A pasta deve ser 'backend' minúscula se for assim no seu projeto!
 
-# 1. Cria o Blueprint (Organizador de Rotas entre as pastas)
-# Define que todas as rotas neste arquivo começarão com /api/auth
+# Cria o Blueprint
 user_bp = Blueprint('user', __name__, url_prefix='/api/auth')
 
 # =================================================================
@@ -14,34 +15,43 @@ user_bp = Blueprint('user', __name__, url_prefix='/api/auth')
 @user_bp.route('/register', methods=['POST'])
 def register_user():
     """ 
-    Recebe os dados do formulário de cadastro base do frontend (nome, email, senha, cpf).
+    Recebe os dados do formulário de cadastro base do frontend e salva no BD.
     """
     
-    # 2. Obtém os dados JSON enviados pelo JavaScript
+    # 1. Obtém os dados JSON
     data = request.get_json()
 
-    # 3. Validação Inicial
+    # 2. Validação Inicial de campos obrigatórios
     if not data or not all(data.get(field) for field in ['nome', 'email', 'senha', 'cpf']):
-        # Erro 400: Dados incompletos ou no formato errado
         return jsonify({"erro": "Campos obrigatórios (nome, email, senha, cpf) estão faltando."}), 400
 
-    # 4. Simulação de Lógica de Negócio
+    # 3. Lógica de Persistência no Banco de Dados
     
-    # Simula a criação de um ID (que o Banco de Dados fará de verdade)
-    usuario_id = random.randint(1000, 9999) 
-    
-    # Cria uma instância da sua classe Usuario
-    novo_usuario = Usuario(
-        id=usuario_id, 
+    # Verifica se o email já está cadastrado (Status 409 Conflict)
+    if Usuario.query.filter_by(email=data['email']).first():
+        return jsonify({"erro": "Este e-mail já está cadastrado."}), 409
+
+    # Cria a instância da sua classe Usuario
+    # 🚨 AJUSTE AQUI: O modelo (usuario_model.py) agora lida com a criptografia
+    novo_usuario = Usuario( 
         nome=data['nome'], 
         email=data['email'], 
-        senha_hash="SIMULADO_HASH_DA_SENHA", # Futuramente, aqui entra a criptografia de senha
+        senha=data['senha'], # <--- PASSAMOS A SENHA EM TEXTO CLARO para a propriedade 'senha'
         cpf=data['cpf'], 
         telefone=data.get('telefone')
     )
     
-    # 5. Resposta de Sucesso
-    # O status 201 significa "Created" (Criado com sucesso)
+    try:
+        # Adiciona e Salva (commit) no Banco de Dados
+        db.session.add(novo_usuario)
+        db.session.commit()
+    except Exception as e:
+        # Em caso de erro, desfaz a operação
+        db.session.rollback()
+        print(f"Erro ao salvar no BD: {e}")
+        return jsonify({"erro": "Erro interno ao processar o registro."}), 500
+
+    # 4. Resposta de Sucesso (Status 201 Created)
     return jsonify({
         "mensagem": f"Usuário '{novo_usuario.nome}' registrado com sucesso!",
         "id_usuario": novo_usuario.id,

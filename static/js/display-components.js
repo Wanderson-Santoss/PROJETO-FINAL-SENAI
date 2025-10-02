@@ -1,3 +1,8 @@
+// =================================================================================
+// 🚨 NOVO: URL BASE DA API (APONTA PARA O SEU SERVIDOR FLASK LOCAL)
+// =================================================================================
+const API_URL = 'http://127.0.0.1:5000/api';
+
 /* ==================== 2. CARROSSEL, GALERIA E LOGIN ==================== */
 document.addEventListener('DOMContentLoaded', function() {
     
